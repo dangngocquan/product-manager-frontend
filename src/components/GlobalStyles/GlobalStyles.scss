@@ -1,7 +1,12 @@
 @import 'normalize.css';
 
 :root {
-    --primary: #666
+    // Colors
+    --primary-color: rgb(30, 47, 64);
+
+    // Sizes
+    --default-layout-header-height: 60px;
+    --default-layout-width: 1150px
 }
 
 * {
