@@ -1,4 +1,4 @@
 .wrapper {
-    background-color: #dfcfcf;
-    height: calc(100vh - var(--default-layout-header-height));
+    max-height: calc(100vh - 2 * var(--default-layout-header-height));
+    overflow: hidden;
 }
