@@ -1,6 +1,8 @@
+import HomeComponent from "../../components/HomeComponent";
+
 function Home() {
     return (
-        <h1>Home page</h1>
+        <HomeComponent></HomeComponent>
     );
 }
 

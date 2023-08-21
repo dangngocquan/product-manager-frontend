@@ -1,14 +1,15 @@
+import styles from './Slider.module.scss';
 import classNames from "classnames/bind";
-import styles from './Sidebar.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Sidebar() {
+
+function Slider() {
     return (
         <div className={cx("wrapper")}>
-
+            <h1>Slider</h1>
         </div>
     )
 }
 
-export default Sidebar;
+export default Slider;

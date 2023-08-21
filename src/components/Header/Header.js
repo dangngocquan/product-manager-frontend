@@ -6,7 +6,7 @@ const cx = classNames.bind(styles);
 function Header() {
     return (
         <div className={cx("wrapper")}>
-
+    
         </div>
     )
 }
