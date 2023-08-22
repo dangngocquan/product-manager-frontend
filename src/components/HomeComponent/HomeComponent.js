@@ -11,11 +11,11 @@ const HomeComponent = memo(function HomeComponent() {
     return (
         <div className={cx("wrapper")}>
             <Slider></Slider>
-            {/* <div className={cx("container")}>
+            <div className={cx("container")}>
                 
                 <ProductList></ProductList>
 
-            </div> */}
+            </div>
         </div>
     )
 });

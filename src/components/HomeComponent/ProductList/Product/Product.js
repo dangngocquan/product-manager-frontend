@@ -4,9 +4,11 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 
-function Product({id}) {
+function Product({innerRef, index,  id}) {
     return (
-        <div className={cx("wrapper")}>
+        <div 
+            className={cx("wrapper")}
+            ref={(element) => innerRef[index] = element}>
             <h1>ID: {id}</h1>
         </div>
     )

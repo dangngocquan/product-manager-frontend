@@ -6,9 +6,11 @@ const cx = classNames.bind(styles);
 
 function Button({children}) {
     return (
-        <div className={cx("wrapper")}>
+        <button 
+            className={cx("wrapper")}
+        >
             {children}
-        </div>
+        </button>
     )
 }
 

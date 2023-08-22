@@ -9,48 +9,78 @@ const cx = classNames.bind(styles);
 
 
 const ProductList = memo(function ProductList() {
-    var ids = [1, 2, 3, 4, 5];
-    const refs = useRef([]);
+    var ids = [1, 2, 3, 4, 5, 6, 7];
+    const refs = useRef(ids.map((id) => null));
     const refButtons = useRef([null, null]);
     const refProductContainer = useRef();
+    const refContainer = useRef();
 
     const [indexStart, setIndexStart] = useState(0);
 
     useEffect(() => {
-        console.log(refProductContainer);
-    }, [indexStart]); 
+        refButtons.current[0].style.visibility = (indexStart == 0)? "hidden" : "visible";
+        refButtons.current[1].style.visibility = 
+            (refProductContainer.current.offsetWidth - indexStart * 350 <= refContainer.current.offsetWidth 
+                || indexStart == ids.length-1)? "hidden" : "visible";
+    }, [indexStart]);
+    
+    useEffect(() => {
+        handleButtonLeft();
+        handleButtonRight();    
+    }, []);
 
     const handleButtonLeft = function() {
         setIndexStart((prev) => (prev - 1) % ids.length);
+        refProductContainer.current.style.left = `${refProductContainer.current.offsetLeft + 350}px`;
     }
 
     const handleButtonRight = function() {
         setIndexStart((prev) => (prev + 1) % ids.length);
+        refProductContainer.current.style.left = `${refProductContainer.current.offsetLeft - 350}px`;
     }
 
     return (
         <div className={cx("wrapper")}>
-            <div ref={refButtons[0]} className={cx("left")} onClick={handleButtonLeft}>
+            <div 
+                className={cx("left")} 
+                onClick={handleButtonLeft}
+                ref={(element) => refButtons.current[0] = element}
+            >
                 <Button>
                     <BsChevronLeft/>
                 </Button>
             </div>
                 
-            <div className={cx("container")}>
+            <div 
+                ref={refContainer}
+                className={cx("container")}
+            >
                 <h1>Category name</h1>
                 
-                <div ref={refProductContainer} className={cx("products")}>
+                <div 
+                    ref={refProductContainer} 
+                    className={cx("products")}
+                >
                     {
                         ids.map((id, index) => {
-                            refs.current.push(null);
                             return (
-                                <Product ref={refs.current[index]} key={index} id={id}></Product>
+                                <Product 
+                                    innerRef={refs.current} 
+                                    index={index}
+                                    key={index} 
+                                    id={id}>
+
+                                </Product>
                             )
                         })
                     }
                 </div>
             </div>
-            <div ref={refButtons[1]} className={cx("right")} onClick={handleButtonRight}>
+            <div 
+                className={cx("right")} 
+                onClick={handleButtonRight}
+                ref={(element) => refButtons.current[1] = element}
+            >
                 <Button>
                     <BsChevronRight/>
                 </Button>

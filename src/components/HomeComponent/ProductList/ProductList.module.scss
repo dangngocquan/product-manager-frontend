@@ -10,6 +10,7 @@
 }
 
 .container {
+    position: relative;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -21,10 +22,12 @@
 
 .products {
     flex: 1;
+    position: relative;
     display: flex;
     flex-wrap: nowrap;
     background-color: #b48282;
     margin-top: 10px;
+    transition: 1s ease-in-out;
 }
 
 .left {
@@ -33,6 +36,7 @@
     margin-top: auto;
     margin-bottom: auto;
     margin-right: 10px;
+    z-index: 0;
 }
 
 .right {
@@ -41,5 +45,7 @@
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 10px;
+    // visibility: visible;
+    z-index: 0;
 }
 
