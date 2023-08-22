@@ -4,12 +4,13 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 
-function SliderImage({image}) {
+function SliderImage({image, display}) {
     return (
         <div 
             className={cx("wrapper")} 
             style={{
-                backgroundImage: `url("${image}")` 
+                backgroundImage: `url("${image}")`,
+                display: display
             }}>
 
         </div>

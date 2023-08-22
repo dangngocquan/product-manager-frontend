@@ -1,5 +1,33 @@
 .wrapper {
     background-size: cover;
     background-repeat: no-repeat;
-    height: calc(100vh - 2 * var(--default-layout-header-height));
+    height: 100%;
+    animation-name: animationIn;
+    animation-duration: var(--slider_duration);
 }
+
+@keyframes animationIn {
+    0% {
+        opacity: 0;
+    }
+    5% {
+        opacity: 1;
+    }
+    95% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+// @keyframes animationOut {
+//     0% {
+//         opacity: 1;
+//         display: "block";
+//     }
+//     100% {
+//         opacity: 0;
+//         display: "none";
+//     }
+// }
