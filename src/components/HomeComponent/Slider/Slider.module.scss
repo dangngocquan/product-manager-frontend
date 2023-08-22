@@ -1,4 +1,21 @@
 .wrapper {
+    background-size: cover;
     height: calc(100vh - 1.5 *var(--default-layout-header-height));
     overflow: hidden;
+    animation: animationIn 20s infinite;
+}
+
+@keyframes animationIn {
+    0% {
+        opacity: 0;
+    }
+    5% {
+        opacity: 1;
+    }
+    95% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }

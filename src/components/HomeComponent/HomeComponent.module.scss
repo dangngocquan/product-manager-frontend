@@ -5,6 +5,9 @@
 }
 
 .container {
-    background-color: rgb(226, 250, 200);
-    height: 500px;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    padding-top: 20vh;
+    background-color: rgb(215, 221, 209);
 }
