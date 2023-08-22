@@ -6,11 +6,70 @@ import Product from "./Product";
 import Button from "../../Button/Button";
 
 const cx = classNames.bind(styles);
+const defaulProductWidtth = 250; // From './src/components/GlobalStyles/GlobalStyles.scss'
+const defaulProductMarginRight = 30; // From './src/components/GlobalStyles/GlobalStyles.scss'
+const widthPerProduct = defaulProductMarginRight + defaulProductWidtth;
 
 
 const ProductList = memo(function ProductList() {
-    var ids = [1, 2, 3, 4, 5, 6, 7];
-    const refs = useRef(ids.map((id) => null));
+    const products = [
+        {
+            "id": "1",
+            "shop_id": "1",
+            "name": "Product name long long long long long long long long long long",
+            "image": "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
+            "price": "100000",
+            "currency": "VND",
+            "stock": "11000",
+            "time_added": "1692570380.252244",
+            "description": "description of product"
+        },
+        {
+            "id": "2",
+            "shop_id": "1",
+            "name": "product 01 of shop 1",
+            "image": "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
+            "price": "100000",
+            "currency": "VND",
+            "stock": "11000",
+            "time_added": "1692570380.252244",
+            "description": "description of product"
+        },
+        {
+            "id": "3",
+            "shop_id": "1",
+            "name": "product 01 of shop 1",
+            "image": "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
+            "price": "100000",
+            "currency": "VND",
+            "stock": "11000",
+            "time_added": "1692570380.252244",
+            "description": "description of product"
+        },
+        {
+            "id": "4",
+            "shop_id": "1",
+            "name": "product 01 of shop 1",
+            "image": "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
+            "price": "100000",
+            "currency": "VND",
+            "stock": "11000",
+            "time_added": "1692570380.252244",
+            "description": "description of product"
+        },
+        {
+            "id": "5",
+            "shop_id": "1",
+            "name": "product 01 of shop 1",
+            "image": "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
+            "price": "100000",
+            "currency": "VND",
+            "stock": "11000",
+            "time_added": "1692570380.252244",
+            "description": "description of product"
+        }
+    ]
+    const refs = useRef(products.map((product) => null));
     const refButtons = useRef([null, null]);
     const refProductContainer = useRef();
     const refContainer = useRef();
@@ -20,8 +79,8 @@ const ProductList = memo(function ProductList() {
     useEffect(() => {
         refButtons.current[0].style.visibility = (indexStart == 0)? "hidden" : "visible";
         refButtons.current[1].style.visibility = 
-            (refProductContainer.current.offsetWidth - indexStart * 350 <= refContainer.current.offsetWidth 
-                || indexStart == ids.length-1)? "hidden" : "visible";
+            (refProductContainer.current.offsetWidth - indexStart * widthPerProduct <= refContainer.current.offsetWidth 
+                || indexStart == products.length-1)? "hidden" : "visible";
     }, [indexStart]);
     
     useEffect(() => {
@@ -30,13 +89,13 @@ const ProductList = memo(function ProductList() {
     }, []);
 
     const handleButtonLeft = function() {
-        setIndexStart((prev) => (prev - 1) % ids.length);
-        refProductContainer.current.style.left = `${refProductContainer.current.offsetLeft + 350}px`;
+        setIndexStart((prev) => (prev - 1) % products.length);
+        refProductContainer.current.style.left = `${refProductContainer.current.offsetLeft + widthPerProduct}px`;
     }
 
     const handleButtonRight = function() {
-        setIndexStart((prev) => (prev + 1) % ids.length);
-        refProductContainer.current.style.left = `${refProductContainer.current.offsetLeft - 350}px`;
+        setIndexStart((prev) => (prev + 1) % products.length);
+        refProductContainer.current.style.left = `${refProductContainer.current.offsetLeft - widthPerProduct}px`;
     }
 
     return (
@@ -62,13 +121,13 @@ const ProductList = memo(function ProductList() {
                     className={cx("products")}
                 >
                     {
-                        ids.map((id, index) => {
+                        products.map((product, index) => {
                             return (
                                 <Product 
                                     innerRef={refs.current} 
                                     index={index}
                                     key={index} 
-                                    id={id}>
+                                    product={product}>
 
                                 </Product>
                             )

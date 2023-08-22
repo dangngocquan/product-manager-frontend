@@ -15,7 +15,6 @@ const Slider = memo(function Slider() {
     const [imgIndex, setImgIndex] = useState(0);
 
     useEffect(() => {
-        console.log("call effect")
         const interval = setInterval(
             () => {
                 setImgIndex(

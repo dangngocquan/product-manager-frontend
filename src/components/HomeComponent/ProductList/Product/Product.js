@@ -4,12 +4,26 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 
-function Product({innerRef, index,  id}) {
+function Product({innerRef, index,  product}) {
     return (
         <div 
             className={cx("wrapper")}
-            ref={(element) => innerRef[index] = element}>
-            <h1>ID: {id}</h1>
+            ref={(element) => innerRef[index] = element}
+        >
+            <div 
+                className={cx("image")}
+                style={{
+                    backgroundImage: `url(${product.image})`
+                }}
+            >
+            </div>
+
+            <div 
+                className={cx("name")}
+            >
+                {product.name}
+            </div>
+           
         </div>
     )
 }

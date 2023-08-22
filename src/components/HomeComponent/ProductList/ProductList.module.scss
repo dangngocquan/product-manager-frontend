@@ -6,7 +6,7 @@
     margin-bottom: 50px;
     max-width: 1250px;
     background-color: rgb(183, 206, 229);
-    height: 400px;
+    height: var(--default-product-height);
 }
 
 .container {
@@ -36,7 +36,6 @@
     margin-top: auto;
     margin-bottom: auto;
     margin-right: 10px;
-    z-index: 0;
 }
 
 .right {
@@ -45,7 +44,6 @@
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 10px;
-    // visibility: visible;
-    z-index: 0;
+
 }
 
