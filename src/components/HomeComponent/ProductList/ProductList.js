@@ -16,24 +16,26 @@ const ProductList = memo(function ProductList() {
         {
             "id": "1",
             "shop_id": "1",
-            "name": "Product name long long long long long long long long long long",
+            "name": "Product name long long long long long long long long long long long long long long long long long long long long long long long long long long",
             "image": "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
             "price": "100000",
             "currency": "VND",
             "stock": "11000",
             "time_added": "1692570380.252244",
-            "description": "description of product"
+            "description": "description of product",
+            "sold": "2100"
         },
         {
             "id": "2",
             "shop_id": "1",
-            "name": "product 01 of shop 1",
+            "name": "Giày thể thao nam G2 Athena Low sneaker trắng bằng da microfiber cao cấp chống nhăn độn đế tăng chiều cao tập thể dục",
             "image": "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
-            "price": "100000",
+            "price": "10000000000000000000000000000000000000000000000",
             "currency": "VND",
             "stock": "11000",
             "time_added": "1692570380.252244",
-            "description": "description of product"
+            "description": "description of product",
+            "sold": "210000000000000000000000000000000000000"
         },
         {
             "id": "3",
@@ -44,7 +46,8 @@ const ProductList = memo(function ProductList() {
             "currency": "VND",
             "stock": "11000",
             "time_added": "1692570380.252244",
-            "description": "description of product"
+            "description": "description of product",
+            "sold": "32"
         },
         {
             "id": "4",
@@ -55,7 +58,8 @@ const ProductList = memo(function ProductList() {
             "currency": "VND",
             "stock": "11000",
             "time_added": "1692570380.252244",
-            "description": "description of product"
+            "description": "description of product",
+            "sold": "32"
         },
         {
             "id": "5",
@@ -66,7 +70,8 @@ const ProductList = memo(function ProductList() {
             "currency": "VND",
             "stock": "11000",
             "time_added": "1692570380.252244",
-            "description": "description of product"
+            "description": "description of product",
+            "sold": "32"
         }
     ]
     const refs = useRef(products.map((product) => null));
@@ -114,7 +119,12 @@ const ProductList = memo(function ProductList() {
                 ref={refContainer}
                 className={cx("container")}
             >
-                <h1>Category name</h1>
+                <div
+                    className={cx("categoryName")}
+                >
+                    <h1>Category name</h1>
+                </div>
+                
                 
                 <div 
                     ref={refProductContainer} 

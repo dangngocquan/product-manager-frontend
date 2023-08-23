@@ -6,7 +6,7 @@
     margin-bottom: 50px;
     max-width: 1250px;
     background-color: rgb(183, 206, 229);
-    height: var(--default-product-height);
+    height: calc(var(--default-product-height) + 80px);
 }
 
 .container {
@@ -17,17 +17,25 @@
     justify-content: start;
     background-color: #886161;
     flex-wrap: wrap;
-    overflow: hidden;
+    overflow: hidden;    
+}
+
+.categoryName {
+    padding-left: 10px;
 }
 
 .products {
-    flex: 1;
-    position: relative;
+    height: calc(var(--default-product-height) + 30px);
+    position: absolute;
+    bottom: 0;
     display: flex;
     flex-wrap: nowrap;
     background-color: #b48282;
     margin-top: 10px;
     transition: 1s ease-in-out;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 10px;
 }
 
 .left {

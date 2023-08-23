@@ -21,7 +21,22 @@ function Product({innerRef, index,  product}) {
             <div 
                 className={cx("name")}
             >
-                {product.name}
+                <h1>{product.name}</h1>
+            </div>
+
+            <div 
+                className={cx("detail")}
+            >
+                <div
+                    className={cx("price")}
+                >
+                    {`${product.price} ${product.currency}`}
+                </div>
+                <div
+                    className={cx("sold")}
+                >
+                    {`${product.sold} sold`}
+                </div>
             </div>
            
         </div>

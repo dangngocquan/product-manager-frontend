@@ -14,6 +14,8 @@ const HomeComponent = memo(function HomeComponent() {
             <div className={cx("container")}>
                 
                 <ProductList></ProductList>
+                <ProductList></ProductList>
+                <ProductList></ProductList>
 
             </div>
         </div>
