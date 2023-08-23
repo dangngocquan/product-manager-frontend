@@ -11,7 +11,7 @@ const defaulProductMarginRight = 30; // From './src/components/GlobalStyles/Glob
 const widthPerProduct = defaulProductMarginRight + defaulProductWidtth;
 
 
-const ProductList = memo(function ProductList() {
+const ProductList = memo(function ProductList({category}) {
     const products = [
         {
             "id": "1",
@@ -122,7 +122,7 @@ const ProductList = memo(function ProductList() {
                 <div
                     className={cx("categoryName")}
                 >
-                    <h1>Category name</h1>
+                    <h1>{category.name}</h1>
                 </div>
                 
                 
