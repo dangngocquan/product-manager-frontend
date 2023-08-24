@@ -1,5 +1,8 @@
+import Image from '../../../Image';
 import styles from './Product.module.scss';
 import classNames from "classnames/bind";
+// import image from "../img1692786236.268246.jpg";
+
 
 const cx = classNames.bind(styles);
 
@@ -12,10 +15,15 @@ function Product({innerRef, index,  product}) {
         >
             <div 
                 className={cx("image")}
-                style={{
-                    backgroundImage: `url(${product.image})`
-                }}
+                // style={{
+                //     backgroundImage: `url(${product.image})`
+                // }}
             >
+                <Image 
+                    imgName={product.image}
+                >
+
+                </Image>
             </div>
 
             <div 

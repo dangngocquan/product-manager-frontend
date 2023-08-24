@@ -1,106 +1,67 @@
 import classNames from "classnames/bind";
-import { memo, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {BsChevronLeft, BsChevronRight} from 'react-icons/bs'
 import styles from './ProductList.module.scss';
 import Product from "./Product";
 import Button from "../../Button/Button";
+import api from '../../../api';
 
 const cx = classNames.bind(styles);
 const defaulProductWidtth = 250; // From './src/components/GlobalStyles/GlobalStyles.scss'
 const defaulProductMarginRight = 30; // From './src/components/GlobalStyles/GlobalStyles.scss'
 const widthPerProduct = defaulProductMarginRight + defaulProductWidtth;
 
+function ProductList({category}) {
+    // console.log("Re-render Product List");
+    const [data, setData] = useState([]);
 
-const ProductList = memo(function ProductList({category}) {
-    const products = [
-        {
-            "id": "1",
-            "shop_id": "1",
-            "name": "Product name long long long long long long long long long long long long long long long long long long long long long long long long long long",
-            "image": "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
-            "price": "100000",
-            "currency": "VND",
-            "stock": "11000",
-            "time_added": "1692570380.252244",
-            "description": "description of product",
-            "sold": "2100"
-        },
-        {
-            "id": "2",
-            "shop_id": "1",
-            "name": "Giày thể thao nam G2 Athena Low sneaker trắng bằng da microfiber cao cấp chống nhăn độn đế tăng chiều cao tập thể dục",
-            "image": "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
-            "price": "10000000000000000000000000000000000000000000000",
-            "currency": "VND",
-            "stock": "11000",
-            "time_added": "1692570380.252244",
-            "description": "description of product",
-            "sold": "210000000000000000000000000000000000000"
-        },
-        {
-            "id": "3",
-            "shop_id": "1",
-            "name": "product 01 of shop 1",
-            "image": "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
-            "price": "100000",
-            "currency": "VND",
-            "stock": "11000",
-            "time_added": "1692570380.252244",
-            "description": "description of product",
-            "sold": "32"
-        },
-        {
-            "id": "4",
-            "shop_id": "1",
-            "name": "product 01 of shop 1",
-            "image": "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
-            "price": "100000",
-            "currency": "VND",
-            "stock": "11000",
-            "time_added": "1692570380.252244",
-            "description": "description of product",
-            "sold": "32"
-        },
-        {
-            "id": "5",
-            "shop_id": "1",
-            "name": "product 01 of shop 1",
-            "image": "https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png",
-            "price": "100000",
-            "currency": "VND",
-            "stock": "11000",
-            "time_added": "1692570380.252244",
-            "description": "description of product",
-            "sold": "32"
-        }
-    ]
-    const refs = useRef(products.map((product) => null));
+    const refs = useRef(data.map((product) => null));
     const refButtons = useRef([null, null]);
     const refProductContainer = useRef();
     const refContainer = useRef();
 
     const [indexStart, setIndexStart] = useState(0);
-
     useEffect(() => {
-        refButtons.current[0].style.visibility = (indexStart == 0)? "hidden" : "visible";
-        refButtons.current[1].style.visibility = 
-            (refProductContainer.current.offsetWidth - indexStart * widthPerProduct <= refContainer.current.offsetWidth 
-                || indexStart == products.length-1)? "hidden" : "visible";
-    }, [indexStart]);
-    
-    useEffect(() => {
-        handleButtonLeft();
-        handleButtonRight();    
+        // console.log("useEffect call API");
+        api.products.getLastestProductsByCategoryId(category.id)
+        .then(function (response) {
+            setData((prev) => {
+                return response.products.products;
+            });
+        }); 
     }, []);
 
+    useEffect(() => {
+        // console.log("useEffect Set visibility of buttons");
+        refButtons.current[0].style.visibility = (indexStart == 0)? "hidden" : "visible";
+        // console.log(refProductContainer.current.offsetWidth + " " +  indexStart * widthPerProduct + " " + refContainer.current.offsetWidth)
+        refButtons.current[1].style.visibility = 
+            (
+                (indexStart == data.length-1 && data.length > 0) || 
+                (data.length > 0 && (data.length - indexStart) * widthPerProduct <= refContainer.current.offsetWidth) ||
+                (data.length == 0)
+            )? "hidden" : "visible";
+    }, [indexStart, data]);
+
+
     const handleButtonLeft = function() {
-        setIndexStart((prev) => (prev - 1) % products.length);
-        refProductContainer.current.style.left = `${refProductContainer.current.offsetLeft + widthPerProduct}px`;
+        if (data.length > 0) {
+            // console.log("Left button work");
+            setIndexStart((prev) => (prev - 1) % data.length);
+            refProductContainer.current.style.left = `${refContainer.current.clientLeft + (indexStart-1) * widthPerProduct}px`;
+        } else {
+            // console.log("Left button not work");
+        }
     }
 
     const handleButtonRight = function() {
-        setIndexStart((prev) => (prev + 1) % products.length);
-        refProductContainer.current.style.left = `${refProductContainer.current.offsetLeft - widthPerProduct}px`;
+        if (data.length > 0) {
+            // console.log("Right button work");
+            setIndexStart((prev) => (prev + 1) % data.length);
+            refProductContainer.current.style.left = `${refContainer.current.clientLeft - (indexStart+1) * widthPerProduct}px`;
+        } else {
+            // console.log("Right button not work");
+        }
     }
 
     return (
@@ -131,7 +92,7 @@ const ProductList = memo(function ProductList({category}) {
                     className={cx("products")}
                 >
                     {
-                        products.map((product, index) => {
+                        data.map((product, index) => {
                             return (
                                 <Product 
                                     innerRef={refs.current} 
@@ -156,6 +117,6 @@ const ProductList = memo(function ProductList({category}) {
             </div>
         </div>
     )
-});
+};
 
 export default ProductList;

@@ -2,14 +2,15 @@ import styles from './Slider.module.scss';
 import classNames from "classnames/bind";
 // import SliderImage from './SliderImage';
 import { memo, useEffect, useState } from 'react';
+import Image from '../../Image/Image';
 
 const cx = classNames.bind(styles);
 
 
 const Slider = memo(function Slider() {
     var images = [
-                        "https://sonbetongconpa.vn/uploads/2019/04/retro-fashion-shop-design.jpg",
-                        "https://media2.cgtrader.com/variants/NV74EzCg83YMBv6q3rAvhqkC/64d1262c1acde2eb3beef249c4695a8ad88c958dd79db36f763bf631017addd0/9c36161a-585e-4db0-90c7-e4c093bc4536.jpg"
+                        "img1692804876.607483.jpg",
+                        "img1692805036.033531.jpg"
                     ];
     
     const [imgIndex, setImgIndex] = useState(0);
@@ -30,10 +31,26 @@ const Slider = memo(function Slider() {
     return (
         <div
             className={cx("wrapper")} 
-            style={{
-                backgroundImage: `url(${images[imgIndex]})`
-            }}>
-
+        >
+            {
+                images.map((image, index) => {
+                    return (
+                        <div
+                            className={cx("image")}
+                            key={index}
+                            style={{
+                                display: (index == imgIndex)? "block" : "none"
+                            }}
+                        >
+                            <Image 
+                                imgName={image}
+                            >
+                            </Image>
+                        </div>
+                    )
+                    
+                })
+            }
         </div>
     )
 });

@@ -6,7 +6,6 @@
     border-width: 2px;
     border-style: solid;
     cursor: pointer;
-    transition: 0.5s;
 }
 
 .wrapper > * {
@@ -14,17 +13,8 @@
     height: 100%;
     scale: 0.7;
     color: #fff;
-    transition: 0.5s;
 }
 
 .wrapper:hover {
-    background-color: #fff;
-    border-color: var(--primary-color);
-    * {
-        color: var(--primary-color);
-        font-weight: bold;
-        transition: 0.5s;
-    }
-    opacity: 0.8;
-    transition: 0.5s;
+    opacity: 0.7;
 }

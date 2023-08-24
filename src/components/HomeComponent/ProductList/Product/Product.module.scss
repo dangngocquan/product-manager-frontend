@@ -1,12 +1,12 @@
 .wrapper {
     // display: flex;
     flex-direction: column;
-    background-color: rgb(156, 137, 140);
+    // background-color: rgb(156, 137, 140);
     height: 100%;
     width: 250px;
     margin-right: 30px;
-    border: solid 1px #fff;
-    box-shadow: -3px 5px 10px #000;
+    // border: solid 1px #fff;
+    // box-shadow: -3px 5px 10px #000;
     animation: 0.3s;
     transition: 0.3s;
 }
@@ -23,7 +23,7 @@
     width: 100%;
     height: 70%;
     background-size: contain;
-    border: solid 1px #ce2626;
+    // border: solid 1px #ce2626;
 }
 
 .name {
