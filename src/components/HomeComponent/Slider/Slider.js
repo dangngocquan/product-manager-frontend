@@ -1,20 +1,24 @@
 import styles from './Slider.module.scss';
 import classNames from "classnames/bind";
-// import SliderImage from './SliderImage';
 import { memo, useEffect, useState } from 'react';
 import Image from '../../Image/Image';
+import api from '../../../api';
+
 
 const cx = classNames.bind(styles);
 
 
 const Slider = memo(function Slider() {
-    var images = [
-                        "img1692869536.983504.jpg",
-                        "img1692869656.217982.jpg",
-                        "img1692869689.628057.jpg",
-                        "img1692869732.483874.jpg",
-                        "img1692869803.582667.jpg"
-                    ];
+    const [images, setImages] = useState([]);
+
+    useEffect(() => {
+        api.sliders.getSliders()
+            .then(function (response) {
+                setImages((prev) => response.sliders.sliders);
+            });
+    }, []);
+
+    
     
     const [imgIndex, setImgIndex] = useState(0);
 
@@ -22,13 +26,20 @@ const Slider = memo(function Slider() {
         const interval = setInterval(
             () => {
                 setImgIndex(
-                    (prev) => (prev+1) % images.length 
+                    (prev) => {
+                        if (images.length > 0) {
+                            return (prev+1) % images.length;
+                        } else {
+                            return 1;
+                        }
+                        
+                    }
                 );
             }, 
             20000);
 
         return () => clearInterval(interval);
-    }, [])
+    }, [images])
 
 
     return (
@@ -38,11 +49,22 @@ const Slider = memo(function Slider() {
                 
             <div
                 className={cx("image")}
-            >
-                <Image 
-                    imgName={images[imgIndex]}
-                >
-                </Image>
+            >   
+                {
+                    images.map((image, index) => {
+                        if (index == imgIndex) {
+                            return (
+                                <Image
+                                    key={image.id}
+                                    imgName={image.image}
+                                >
+
+                                </Image>
+                            )
+                        }
+                    } )
+                }
+                
             </div>
           
         </div>
