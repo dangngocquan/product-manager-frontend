@@ -9,8 +9,11 @@ const cx = classNames.bind(styles);
 
 const Slider = memo(function Slider() {
     var images = [
-                        "img1692804876.607483.jpg",
-                        "img1692805036.033531.jpg"
+                        "img1692869536.983504.jpg",
+                        "img1692869656.217982.jpg",
+                        "img1692869689.628057.jpg",
+                        "img1692869732.483874.jpg",
+                        "img1692869803.582667.jpg"
                     ];
     
     const [imgIndex, setImgIndex] = useState(0);

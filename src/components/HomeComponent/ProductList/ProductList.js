@@ -47,8 +47,8 @@ function ProductList({category}) {
     const handleButtonLeft = function() {
         if (data.length > 0) {
             // console.log("Left button work");
-            setIndexStart((prev) => (prev - 1) % data.length);
-            refProductContainer.current.style.left = `${refContainer.current.clientLeft + (indexStart-1) * widthPerProduct}px`;
+            setIndexStart((prev) => (prev - 1));
+            refProductContainer.current.style.translate = `-${(indexStart-1) * widthPerProduct}px`;
         } else {
             // console.log("Left button not work");
         }
@@ -57,8 +57,8 @@ function ProductList({category}) {
     const handleButtonRight = function() {
         if (data.length > 0) {
             // console.log("Right button work");
-            setIndexStart((prev) => (prev + 1) % data.length);
-            refProductContainer.current.style.left = `${refContainer.current.clientLeft - (indexStart+1) * widthPerProduct}px`;
+            setIndexStart((prev) => (prev + 1));
+            refProductContainer.current.style.translate = `${-(indexStart+1) * widthPerProduct}px`;
         } else {
             // console.log("Right button not work");
         }
