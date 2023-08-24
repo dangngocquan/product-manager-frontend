@@ -35,25 +35,16 @@ const Slider = memo(function Slider() {
         <div
             className={cx("wrapper")} 
         >
-            {
-                images.map((image, index) => {
-                    return (
-                        <div
-                            className={cx("image")}
-                            key={index}
-                            style={{
-                                display: (index == imgIndex)? "block" : "none"
-                            }}
-                        >
-                            <Image 
-                                imgName={image}
-                            >
-                            </Image>
-                        </div>
-                    )
-                    
-                })
-            }
+                
+            <div
+                className={cx("image")}
+            >
+                <Image 
+                    imgName={images[imgIndex]}
+                >
+                </Image>
+            </div>
+          
         </div>
     )
 });

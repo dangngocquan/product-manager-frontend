@@ -10,8 +10,11 @@
     display: block;
     overflow: hidden;
     width: 100%;
-    height: 100%;
-    animation: animationIn var(--slider-duration);
+    height: 100%;   
+}
+
+.image > * {
+    animation: animationIn var(--slider-duration) infinite;
 }
 
 @keyframes animationIn {
