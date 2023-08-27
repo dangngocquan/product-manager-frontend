@@ -1,6 +1,7 @@
 const routes = {
     home: "/",
-    categories: "/categories"
+    categories: "/categories",
+    login: "/login",
 }
 
-export default routes;
+export default routes;  

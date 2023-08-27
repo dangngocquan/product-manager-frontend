@@ -1,0 +1,122 @@
+:root {
+    --color-1: #3999e3;
+    --color-2: #cef0ec;
+}
+
+.wrapper {
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 1s;
+    box-shadow: 0px 10px 10px #fff;
+}
+
+.heading {
+    font-size: 5rem;
+    text-align: center;
+    padding: 20px 0px;
+    color: var(--primary-color-text);
+}
+
+.form {
+    background-color: transparent;
+    flex: 1;
+    width: 90%;
+}
+
+.field {
+    display: flex;
+    width: 100%;
+    height: 80px;
+    background-color: transparent;
+    margin-bottom: 10px;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.field > * {
+    height: 40px;
+    transition: 0.3s;
+}
+
+.field-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.field-icon > * {
+    height: 60%;
+    width: 60%;
+    transition: 0.3s;
+}
+
+.field-input {
+    flex: 1;
+    border-radius: 0px;
+    border-width: 0px;
+    border-bottom: 2px solid var(--primary-color-text);
+    background-color: transparent;
+    transition: 0.3s;
+    margin-right: 10px;
+    font-size: 1.6rem;
+}
+
+.field-input::placeholder {
+    color: transparent;
+}
+
+.field:focus-within {
+    .field-input {
+        outline: none;
+        border-bottom: 2px solid;
+        border-image: linear-gradient(to right, var(--color-1), var(--color-2));
+        border-image-slice: 1;
+    }
+    
+    .field-icon > * {
+        color: #fff;
+    }
+
+    .field-label {
+        font-size: 1.3rem;
+        cursor: text;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-left: 40px;
+        transform: translateY(-14px);
+        background: -webkit-linear-gradient(var(--color-1), var(--color-2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
+
+.field-label {
+    position: absolute;
+    font-size: 1.6rem;
+    cursor: text;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 40px;
+    transform: translateY(8px);
+    color: var(--primary-color-text);
+}
+
+.field-input:not(:placeholder-shown) ~ .field-label {
+    font-size: 1.3rem;
+    cursor: text;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 40px;
+    transform: translateY(-14px);
+    background: -webkit-linear-gradient(var(--color-1), var(--color-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+

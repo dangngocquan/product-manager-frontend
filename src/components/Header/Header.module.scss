@@ -4,7 +4,7 @@
     left: 0;
     z-index: 10;
     display: flex;
-    // justify-content: center;
+    justify-content: space-between;
     width: 100%;
     background-color: var(--primary-color);
     height: var(--default-layout-header-height);
@@ -15,4 +15,43 @@
     height: var(--default-layout-header-height);
     width: var(--default-layout-header-height);
     margin-left: 20px;
+}
+
+.buttonLogin {
+    display: flex;
+    flex-direction: column;
+    height: calc(var(--default-layout-header-height));
+    // width: calc(var(--default-layout-header-height));
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+
+
+.buttonLogin > * {
+    color: var(--primary-color-item);
+    transition: 0.3s;
+}
+
+.buttonLogin > *:first-child {
+    width: 60%;
+    height: 60%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.textLogin {
+    flex: 1;
+    font-size: 1.4rem;
+    text-align: center;
+    vertical-align: center;
+}
+
+.buttonLogin:hover {
+    cursor: pointer;
+    text-decoration: none;
+    * {
+        opacity: 0.7;
+    }
 }

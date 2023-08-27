@@ -1,0 +1,37 @@
+.wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--primary-color);
+
+}
+
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 80%;
+    max-width: 600px;
+    min-height: 400px;
+    max-height: 500px;
+    background-color: #fff;
+}
+
+.sign-in {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+
+.sign-up {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    // z-index: 10;
+}

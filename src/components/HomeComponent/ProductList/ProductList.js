@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import { useEffect, useRef, useState } from 'react';
-import {BsChevronLeft, BsChevronRight} from 'react-icons/bs'
+import Icons from '../../Icon';
 import styles from './ProductList.module.scss';
 import Product from "./Product";
 import Button from "../../Button/Button";
@@ -72,7 +72,7 @@ function ProductList({category}) {
                 ref={(element) => refButtons.current[0] = element}
             >
                 <Button>
-                    <BsChevronLeft/>
+                    {Icons.ArrowLeft}
                 </Button>
             </div>
                 
@@ -112,7 +112,7 @@ function ProductList({category}) {
                 ref={(element) => refButtons.current[1] = element}
             >
                 <Button>
-                    <BsChevronRight/>
+                    {Icons.ArrowRight}
                 </Button>
             </div>
         </div>
