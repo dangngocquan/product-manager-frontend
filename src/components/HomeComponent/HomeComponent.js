@@ -21,7 +21,11 @@ function HomeComponent() {
 
     return (
         <div className={cx("wrapper")}>
-            <Slider></Slider>
+            <div
+                className={cx("slider")}
+            >
+                <Slider></Slider>
+            </div>
             <div className={cx("container")}>
                 {
                     data.map((category, index) => {

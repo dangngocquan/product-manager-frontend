@@ -9,5 +9,9 @@
     flex-direction: column;
     max-width: 100%;
     padding-top: 20vh;
-    background-color: rgb(215, 221, 209);
+    background-color: var(--primary-color-background);
+}
+
+.slider {
+    height: calc(100vh - var(--default-layout-header-height));
 }

@@ -5,6 +5,7 @@
     z-index: 10;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
     background-color: var(--primary-color);
     height: var(--default-layout-header-height);
@@ -12,19 +13,20 @@
 }
 
 .logo {
-    height: var(--default-layout-header-height);
-    width: var(--default-layout-header-height);
+    height: calc(0.8 * var(--default-layout-header-height));
+    width: calc(0.8 * var(--default-layout-header-height));
     margin-left: 20px;
 }
 
 .buttonLogin {
     display: flex;
     flex-direction: column;
-    height: calc(var(--default-layout-header-height));
-    // width: calc(var(--default-layout-header-height));
+    height: calc(0.7 * var(--default-layout-header-height));
     align-items: center;
     justify-content: center;
     margin-right: 20px;
+    text-decoration: none;
+
 }
 
 

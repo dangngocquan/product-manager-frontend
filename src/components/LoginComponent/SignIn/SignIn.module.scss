@@ -12,7 +12,12 @@
     justify-content: center;
     align-items: center;
     transition: 1s;
+    // box-shadow: 0px 10px 10px #fff;
+}
+
+.wrapper:hover {
     box-shadow: 0px 10px 10px #fff;
+    transform: translateY(-10px);
 }
 
 .heading {

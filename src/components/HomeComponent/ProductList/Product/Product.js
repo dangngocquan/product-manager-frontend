@@ -15,9 +15,6 @@ function Product({innerRef, index,  product}) {
         >
             <div 
                 className={cx("image")}
-                // style={{
-                //     backgroundImage: `url(${product.image})`
-                // }}
             >
                 <Image 
                     imgName={product.image}

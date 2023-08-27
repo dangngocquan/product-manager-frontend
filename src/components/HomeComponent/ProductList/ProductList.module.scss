@@ -5,8 +5,9 @@
     margin-right: auto;
     margin-bottom: 50px;
     max-width: 1250px;
-    background-color: #fff;
+    background-color: transparent;
     height: calc(var(--default-product-height) + 80px);
+    color: var(--primary-color-text);
 
 }
 
@@ -16,7 +17,6 @@
     display: flex;
     flex-direction: column;
     justify-content: start;
-    // background-color: #886161;
     flex-wrap: wrap;
     overflow: hidden;
     transition: 1s;  
@@ -32,7 +32,6 @@
     bottom: 0;
     display: flex;
     flex-wrap: nowrap;
-    // background-color: #b48282;
     margin-top: 10px;
     transition: 0.5s;
     padding-top: 15px;
@@ -47,7 +46,6 @@
     margin-top: auto;
     margin-bottom: auto;
     margin-right: 10px;
-    // visibility: visible;
 }
 
 .right {
@@ -56,6 +54,5 @@
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 10px;
-    // visibility: visible;
 }
 

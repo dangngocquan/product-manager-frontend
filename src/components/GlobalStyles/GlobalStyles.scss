@@ -3,12 +3,19 @@
 
 :root {
     // Colors
-    --primary-color: rgb(65, 67, 70);
-    --primary-color-item: #fff;
-    --primary-color-text: #333;
-
+    --gray-color-1: #333333;
+    --gray-color-2: #606060;
+    --gray-color-3: #808080;
+    --gray-color-4: #C0C0C0;
+    --gray-color-5: #F2F2F2;
+    --white-color-1: #ffffff;
+    --primary-color: var(--gray-color-3);
+    --primary-color-item: var(--white-color-1);
+    --primary-color-text: var(--gray-color-2);
+    --primary-color-background: var(--white-color-1);
+    
     // Sizes
-    --default-layout-header-height: 70px;
+    --default-layout-header-height: 90px;
     --default-layout-width: 1150px;
     --default-product-width: 250px;
     --default-product-height: 400px;
