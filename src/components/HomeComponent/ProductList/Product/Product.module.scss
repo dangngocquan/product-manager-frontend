@@ -9,7 +9,7 @@
 }
 
 .wrapper:hover {
-    box-shadow: -3px 10px 15px var(--primary-color-shadow);
+    box-shadow: -3px 10px 15px var(--primary-color-shadow-1);
     transform: translateY(-10px);
     animation: animationHover 0.3s;
     cursor: pointer;
@@ -69,11 +69,11 @@
 
 @keyframes animationHover {
     0% {
-        box-shadow: -3px 5px 10px var(--primary-color-shadow);
+        box-shadow: -3px 5px 10px var(--primary-color-shadow-1);
         transform: translateY(0px);
     }
     100% {
-        box-shadow: -3px 10px 15px var(--primary-color-shadow);
+        box-shadow: -3px 10px 15px var(--primary-color-shadow-1);
         transform: translateY(-10px);
     }
 }

@@ -1,23 +1,32 @@
 :root {
-    --color-1: #3999e3;
-    --color-2: #cef0ec;
+    --color-1: var(--green-color-1);
+    --color-2: var(--white-color-1);
+    --color-3: var(--green-color-1);
+    --color-4: var(--black-color-1);
 }
 
 .wrapper {
     width: 100%;
     height: 100%;
-    background-color: var(--primary-color);
+    background-color: var(--gray-color-4);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     transition: 1s;
-    // box-shadow: 0px 10px 10px #fff;
+}
+
+::selection {
+    background: var(--white-color-1);
 }
 
 .wrapper:hover {
     box-shadow: 0px 10px 10px #fff;
+    caret-color: var(--primary-color-cursor-2);
     transform: translateY(-10px);
+    .heading {
+        color: var(--primary-color-item-hover);
+    }
 }
 
 .heading {
@@ -25,6 +34,8 @@
     text-align: center;
     padding: 20px 0px;
     color: var(--primary-color-text);
+    transition: 0.5s;
+    user-select: none;
 }
 
 .form {
@@ -54,6 +65,7 @@
     justify-content: center;
     width: 40px;
     height: 40px;
+    transform: translateY(-2px);
 }
 
 .field-icon > * {
@@ -71,10 +83,12 @@
     transition: 0.3s;
     margin-right: 10px;
     font-size: 1.6rem;
+    color: var(--primary-color-text)
 }
 
 .field-input::placeholder {
     color: transparent;
+    user-select: none;
 }
 
 .field:focus-within {
@@ -86,17 +100,15 @@
     }
     
     .field-icon > * {
-        color: #fff;
+        color: var(--gray-color-2);
     }
 
     .field-label {
-        font-size: 1.3rem;
-        cursor: text;
-        margin-top: auto;
-        margin-bottom: auto;
+        font-size: 1.4rem;
+        cursor: text ;
         margin-left: 40px;
-        transform: translateY(-14px);
-        background: -webkit-linear-gradient(var(--color-1), var(--color-2));
+        transform: translateY(-25px);
+        background: -webkit-linear-gradient(var(--color-3), var(--color-4));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
@@ -105,22 +117,19 @@
 .field-label {
     position: absolute;
     font-size: 1.6rem;
+    height: 20px;
     cursor: text;
-    margin-top: auto;
-    margin-bottom: auto;
     margin-left: 40px;
-    transform: translateY(8px);
     color: var(--primary-color-text);
 }
 
 .field-input:not(:placeholder-shown) ~ .field-label {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     cursor: text;
-    margin-top: auto;
-    margin-bottom: auto;
+    user-select: none;
     margin-left: 40px;
-    transform: translateY(-14px);
-    background: -webkit-linear-gradient(var(--color-1), var(--color-2));
+    transform: translateY(-25px);
+    background: -webkit-linear-gradient(var(--color-3), var(--color-4));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }

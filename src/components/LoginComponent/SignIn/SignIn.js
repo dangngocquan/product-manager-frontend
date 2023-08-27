@@ -59,8 +59,9 @@ function SignIn() {
                         {Icons.Password}
                     </div>
 
-                    <input
+                    <input 
                         className={cx("field-input")}
+                        type="password"
                         placeholder='password'
                         id={password}
                     >
