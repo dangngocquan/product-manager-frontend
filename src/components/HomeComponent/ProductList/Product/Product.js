@@ -35,12 +35,12 @@ function Product({innerRef, index,  product}) {
                 <div
                     className={cx("price")}
                 >
-                    {`${product.price} ${product.currency}`}
+                    {`${product.currency} ${product.price}`}
                 </div>
                 <div
                     className={cx("sold")}
                 >
-                    {`${product.sold} sold`}
+                    {`${product.sold === undefined? 0 : product.sold} sold`}
                 </div>
             </div>
            
