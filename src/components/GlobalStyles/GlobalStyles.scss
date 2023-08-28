@@ -11,6 +11,7 @@
     --gray-color-5: #F2F2F2;
     --white-color-1: #ffffff;
     --green-color-1: #32CD32;
+    --red-color-1: #DC143C;
     --primary-color: var(--gray-color-3);
     --primary-color-item: var(--white-color-1);
     --primary-color-text: var(--gray-color-2);
@@ -20,6 +21,7 @@
     --primary-color-shadow-2: var(--white-color-1);
     --primary-color-cursor-1: var(--black-color-1);
     --primary-color-cursor-2: var(--white-color-1);
+    --primary-color-invalid-message: var(--red-color-1);
     
     // Sizes
     --default-layout-header-height: 90px;

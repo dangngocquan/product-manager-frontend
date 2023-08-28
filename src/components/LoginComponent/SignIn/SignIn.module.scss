@@ -14,6 +14,7 @@
     justify-content: center;
     align-items: center;
     transition: 1s;
+    caret-color: var(--primary-color-cursor-2);
 }
 
 ::selection {
@@ -22,7 +23,6 @@
 
 .wrapper:hover {
     box-shadow: 0px 10px 10px #fff;
-    caret-color: var(--primary-color-cursor-2);
     transform: translateY(-10px);
     .heading {
         color: var(--primary-color-item-hover);
@@ -34,11 +34,14 @@
     text-align: center;
     padding: 20px 0px;
     color: var(--primary-color-text);
-    transition: 0.5s;
+    transition: 2s;
     user-select: none;
 }
 
 .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: transparent;
     flex: 1;
     width: 90%;
@@ -123,6 +126,14 @@
     color: var(--primary-color-text);
 }
 
+.field-message {
+    position: absolute;
+    color: var(--primary-color-invalid-message);
+    font-size: 1.2rem;
+    transform: translate(40px, 45px);
+    user-select: none;
+}
+
 .field-input:not(:placeholder-shown) ~ .field-label {
     font-size: 1.4rem;
     cursor: text;
@@ -132,5 +143,37 @@
     background: -webkit-linear-gradient(var(--color-3), var(--color-4));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+.message-login-status {
+    // position: absolute;
+    height: 1.6rem;
+    color: var(--primary-color-invalid-message);
+    font-size: 1.4rem;
+    transform: translate(0px, 25px);
+    user-select: none;
+}
+
+
+// Button Submit
+.wrapper-submit {
+    width: 100px;
+    height: 50px;
+    margin-top: 10%;
+    background-image: linear-gradient(var(--color-1), var(--color-2));
+}
+
+.submit {
+    width: 100%;
+    height: 100%;
+    transition: 0.5s;
+}
+
+.submit:hover {
+    box-shadow: 0px 5px 10px var(--primary-color-shadow-2);
+}
+
+.submit h1 {
+    transform: translateY(5px);
 }
 
