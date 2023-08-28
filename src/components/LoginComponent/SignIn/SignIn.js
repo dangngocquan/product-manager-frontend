@@ -5,22 +5,24 @@ import { useEffect, useId, useRef, useState } from 'react';
 import Button from '../../Button/Button';
 import services from '../../../services';
 import api from '../../../api';
+import configs from "../../../configs";
+import {Link} from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 
-function SignIn() {
+function SignIn({token, setToken}) {
+    // console.log("Render");
     const username = useId();
     const password = useId();
 
     const refUsername = useRef();
     const refPassword = useRef();
+    const refBackHome = useRef();
 
     const [messageUsername, setMessageUsername] = useState("");
     const [messagePassword, setMessagePassword] = useState("");
     const [messageLoginStatus, setMessageLoginStatus] = useState("");
-
-    // const [response, setResponse] = useState({});
 
     function handleFieldOnFocus() {
         if (messageUsername !== "") {
@@ -35,6 +37,7 @@ function SignIn() {
     }
 
     function handleSubmit() {
+        // console.log("Start Handle Submit");
         const usernameChecker = services.isUserNameValid(refUsername.current.value);
         if (usernameChecker.isValid) {
             const passwordChecker = services.isPasswordValid(refPassword.current.value);
@@ -50,8 +53,12 @@ function SignIn() {
                                 .then((res) => {
                                     if (res.token == null) {
                                         setMessageLoginStatus((prev) => res.message);
+                                        // console.log("End handle in promise");
                                     } else {
                                         setMessageLoginStatus((prev) => res.message);
+                                        setToken((prev) => res.token);
+                                        refBackHome.current.click();
+                                        console.log("Come to Home Page");
                                     }
                                 })
                             
@@ -74,6 +81,15 @@ function SignIn() {
         <div
             className={cx("wrapper")}
         >
+
+            <Link
+                className={cx("back-home")}
+                to={configs.routes.home}
+                ref={refBackHome}
+            >
+                {Icons.Home}
+            </Link>
+
             <div
                 className={cx("heading")}
             > 

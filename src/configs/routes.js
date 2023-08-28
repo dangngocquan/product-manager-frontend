@@ -1,7 +1,7 @@
 const routes = {
     home: "/",
     categories: "/categories",
-    login: "/login",
+    login: "/login"
 }
 
 export default routes;  

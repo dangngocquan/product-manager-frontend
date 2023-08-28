@@ -1,10 +1,12 @@
 import classNames from "classnames/bind";
 import { useEffect, useRef, useState } from 'react';
+import {motion} from 'framer-motion';
 import Icons from '../../Icon';
 import styles from './ProductList.module.scss';
 import Product from "./Product";
 import Button from "../../Button/Button";
 import api from '../../../api';
+import services from "../../../services";
 
 const cx = classNames.bind(styles);
 const defaulProductWidtth = 250; // From './src/components/GlobalStyles/GlobalStyles.scss'
@@ -80,16 +82,22 @@ function ProductList({category}) {
                 ref={refContainer}
                 className={cx("container")}
             >
-                <div
+                <motion.div
                     className={cx("categoryName")}
+                    variants={services.routeAnimations.home.productList.categoryName}
+                    initial="initial"
+                    animate="final"
                 >
                     <h1>{category.name}</h1>
-                </div>
+                </motion.div>
                 
                 
-                <div 
+                <motion.div 
                     ref={refProductContainer} 
                     className={cx("products")}
+                    variants={services.routeAnimations.home.productList.products}
+                    initial="initial"
+                    animate="final"
                 >
                     {
                         data.map((product, index) => {
@@ -104,17 +112,20 @@ function ProductList({category}) {
                             )
                         })
                     }
-                </div>
+                </motion.div>
             </div>
-            <div 
+            <motion.div 
                 className={cx("right")} 
                 onClick={handleButtonRight}
                 ref={(element) => refButtons.current[1] = element}
+                variants={services.routeAnimations.home.productList.right}
+                initial="initial"
+                animate="final"
             >
                 <Button>
                     {Icons.ArrowRight}
                 </Button>
-            </div>
+            </motion.div>
         </div>
     )
 };

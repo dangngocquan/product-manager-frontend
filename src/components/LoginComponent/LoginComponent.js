@@ -6,13 +6,11 @@ import SignUp from './SignUp';
 const cx = classNames.bind(styles);
 
 
-function LoginComponent() {
+function LoginComponent({setToken}) {
     return (
         <div
             className={cx("wrapper")}
         >
-
-
             <div
                 className={cx("container")}
             >
@@ -20,7 +18,9 @@ function LoginComponent() {
                 <div
                     className={cx("sign-in")}
                 > 
-                    <SignIn></SignIn>
+                    <SignIn
+                        setToken={setToken}
+                    ></SignIn>
                 </div>
 
                 <div

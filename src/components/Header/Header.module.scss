@@ -26,14 +26,10 @@
     justify-content: center;
     margin-right: 20px;
     text-decoration: none;
-
-}
-
-
-
-.buttonLogin > * {
-    color: var(--primary-color-item);
-    transition: 0.3s;
+    * {
+        color: var(--primary-color-item);
+        transition: 0.3s;
+    }
 }
 
 .buttonLogin > *:first-child {

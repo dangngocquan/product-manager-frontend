@@ -1,8 +1,14 @@
 import HomeComponent from "../../components/HomeComponent";
 
-function Home() {
+function Home({token, setToken}) {
+    console.log("Render Page Home");
     return (
-        <HomeComponent></HomeComponent>
+        <HomeComponent
+            token={token}
+            setToken={setToken}
+        >
+
+        </HomeComponent>
     );
 }
 

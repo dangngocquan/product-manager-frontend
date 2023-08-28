@@ -5,10 +5,13 @@ import styles from './DefaultLayout.module.scss';
 
 const cx = classNames.bind(styles);
 
-function DefaultLayout({children}) {
+function DefaultLayout({token, setToken, children}) {
     return (
         <div className={cx('wrapper')}>
-            <Header />
+            <Header
+                token={token}
+                setToken={setToken}
+            />
             <div className={cx('container')}>
                 {children}
             </div>

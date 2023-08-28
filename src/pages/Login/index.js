@@ -1,8 +1,12 @@
 import LoginComponent from "../../components/LoginComponent";
 
-function Login() {
+function Login({token, setToken}) {
+    console.log("Render Page Login");
     return (
-        <LoginComponent></LoginComponent>
+        <LoginComponent
+            token={token}
+            setToken={setToken}
+        ></LoginComponent>
     );
 }
 

@@ -1,35 +1,25 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { publicRoutes } from "./routes";
+import { BrowserRouter } from "react-router-dom";
+import { useState } from "react";
+import LocationProvider from "./components/LocationProvider";
+import RoutesWithAnimation from "./components/RoutesWithAnimation";
 
 function App() {
+  const [token, setToken] = useState(null);
+  console.log("Re-render App Component");
+
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Routes>
-          {
-            publicRoutes.map((route, index) => {
-              const Page = route.component;
-              const Layout = route.layout;
+    <div className="App">
+      <BrowserRouter>
+        <LocationProvider>
+          <RoutesWithAnimation
+            token={token}
+            setToken={setToken}
+          >
 
-
-              return (
-                <Route
-                  key={index}
-                  path={route.path}
-                  element={
-                    <Layout>
-                      
-                      <Page/>
-                      
-                    </Layout>
-                  }
-                />
-              )
-            })
-          }
-        </Routes>
-      </div>
-    </BrowserRouter>
+          </RoutesWithAnimation>
+        </LocationProvider>
+      </BrowserRouter>
+    </div>
   );
 }
 
