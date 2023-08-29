@@ -7,11 +7,12 @@ import services from '../../../services';
 import api from '../../../api';
 import configs from "../../../configs";
 import {Link} from 'react-router-dom';
+import { motion, useTime, useTransform } from 'framer-motion';
 
 const cx = classNames.bind(styles);
 
 
-function SignIn({token, setToken}) {
+function SignIn({token, setToken, setComponentShowing}) {
     // console.log("Render");
     const username = useId();
     const password = useId();
@@ -23,6 +24,7 @@ function SignIn({token, setToken}) {
     const [messageUsername, setMessageUsername] = useState("");
     const [messagePassword, setMessagePassword] = useState("");
     const [messageLoginStatus, setMessageLoginStatus] = useState("");
+    const [isHiddenPassword, setIsHiddenPassowd] = useState(true);
 
     function handleFieldOnFocus() {
         if (messageUsername !== "") {
@@ -34,6 +36,14 @@ function SignIn({token, setToken}) {
         if (messageLoginStatus !== "") {
             setMessageLoginStatus((prev) => "");
         }
+    }
+
+    function handleEyeOnClick() {
+        setIsHiddenPassowd((prev) => !prev);
+    }
+
+    function handleComponentShowingOnClick() {
+        setComponentShowing((prev) => 1-prev);
     }
 
     function handleSubmit() {
@@ -93,7 +103,7 @@ function SignIn({token, setToken}) {
             <div
                 className={cx("heading")}
             > 
-                Login
+                Log in
             </div>
 
             <div
@@ -111,7 +121,7 @@ function SignIn({token, setToken}) {
 
                     <input
                         className={cx("field-input")}
-                        placeholder='username'
+                        placeholder='Username'
                         id={username}
                         ref={refUsername}
                         onFocus={handleFieldOnFocus}
@@ -145,8 +155,8 @@ function SignIn({token, setToken}) {
 
                     <input 
                         className={cx("field-input")}
-                        type="password"
-                        placeholder='password'
+                        type={isHiddenPassword? "password" : "text"}
+                        placeholder='Password'
                         id={password}
                         ref={refPassword}
                         onFocus={handleFieldOnFocus}
@@ -160,12 +170,20 @@ function SignIn({token, setToken}) {
                         Password
                     </label>
 
+                    <div 
+                        className={cx("eye")}
+                        onClick={handleEyeOnClick}
+                    >
+                        {isHiddenPassword? Icons.Eye : Icons.EyeInvisible}
+                    </div>
+
                     <p
                         className={cx("field-message")}
                     >
                         {messagePassword}
                     </p>
                 </div>
+
 
 
                 {/* Message login status */}
@@ -185,13 +203,27 @@ function SignIn({token, setToken}) {
                         onClick={handleSubmit}
                     >
                         <Button>
-                            <h1>LOGIN</h1>
+                            <h1>Log in</h1>
                         </Button>
 
                     </div>
 
                 </div>
 
+            </div>
+
+
+            {/* Don't have an account? Register Now */}
+            <div
+                className={cx("change-component")}
+            >
+                <p>Don't have an account? 
+                    <span
+                        onClick={handleComponentShowingOnClick}
+                    >
+                        Register Now
+                    </span>
+                </p> 
             </div>
         </div>
     )

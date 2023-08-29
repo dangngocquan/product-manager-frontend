@@ -1,5 +1,253 @@
+:root {
+    --color-1: var(--green-color-1);
+    --color-2: var(--white-color-1);
+    --color-3: var(--green-color-1);
+    --color-4: var(--black-color-1);
+}
+
 .wrapper {
     width: 100%;
     height: 100%;
-    background-color: #af6f6f;
+    background-color: var(--gray-color-4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 1s;
+    caret-color: var(--primary-color-cursor-2);
+}
+
+::selection {
+    background: var(--white-color-1);
+}
+
+.wrapper:hover {
+    .heading {
+        color: var(--primary-color-item-hover);
+    }
+}
+
+.back-home {
+    text-decoration: none;
+    display: flex;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    left: 5%;
+    top: 0;
+    align-items: center;
+    justify-content: center;
+    color: var(--gray-color-1);
+    * {
+        width: 75%;
+        height: 75%;
+        transition: 0.3s;
+    }
+}
+
+
+.back-home:hover {
+    * {
+        color: var(--primary-color-item-hover);
+    }
+}
+
+.heading {
+    font-size: 5rem;
+    text-align: center;
+    padding: 10px 0px;
+    color: var(--primary-color-text);
+    transition: 2s;
+    user-select: none;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+    flex: 1;
+    width: 90%;
+}
+
+.field {
+    display: flex;
+    width: 100%;
+    height: 80px;
+    background-color: transparent;
+    margin-bottom: 10px;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.field > * {
+    height: 40px;
+    transition: 0.3s;
+}
+
+.field-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    transform: translateY(-2px);
+}
+
+.field-icon > * {
+    height: 60%;
+    width: 60%;
+    transition: 0.3s;
+}
+
+.field-input {
+    flex: 1;
+    border-radius: 0px;
+    border-width: 0px;
+    border-bottom: 2px solid var(--primary-color-text);
+    background-color: transparent;
+    transition: 0.3s;
+    margin-right: 10px;
+    font-size: 1.6rem;
+    color: var(--primary-color-text);
+}
+
+.field-input[type="password"] {
+    padding-right: 40px;
+}
+
+.field-input::placeholder {
+    color: transparent;
+    user-select: none;
+}
+
+.field:focus-within {
+    .field-input {
+        outline: none;
+        border-bottom: 2px solid;
+        border-image: linear-gradient(to right, var(--color-1), var(--color-2));
+        border-image-slice: 1;
+    }
+    
+    .field-icon > * {
+        color: var(--gray-color-2);
+    }
+
+    .field-label {
+        font-size: 1.4rem;
+        cursor: text ;
+        margin-left: 40px;
+        transform: translateY(-25px);
+        background: -webkit-linear-gradient(var(--color-3), var(--color-4));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
+
+.field-label {
+    position: absolute;
+    font-size: 1.6rem;
+    height: 20px;
+    cursor: text;
+    margin-left: 40px;
+    color: var(--primary-color-text);
+}
+
+.eye {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    right: 0px;
+    transform: translate(-100%, -2px);
+    cursor: pointer;
+    * {
+        height: 60%;
+        width: 60%;
+        transition: 0.3s;
+    }
+}
+
+.eye:hover {
+    * {
+        opacity: 0.7;;
+    }
+}
+
+.field-message {
+    position: absolute;
+    color: var(--primary-color-invalid-message);
+    font-size: 1.2rem;
+    transform: translate(40px, 45px);
+    user-select: none;
+}
+
+.field-input:not(:placeholder-shown) ~ .field-label {
+    font-size: 1.4rem;
+    cursor: text;
+    user-select: none;
+    margin-left: 40px;
+    transform: translateY(-25px);
+    background: -webkit-linear-gradient(var(--color-3), var(--color-4));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.message-login-status {
+    // position: absolute;
+    height: 1.6rem;
+    color: var(--primary-color-invalid-message);
+    font-size: 1.4rem;
+    user-select: none;
+}
+
+
+// Button Submit
+.wrapper-submit {
+    width: 150px;
+    height: 50px;
+    margin-top: 15px;
+    background-image: linear-gradient(var(--color-1), var(--color-2));
+}
+
+.submit {
+    width: 100%;
+    height: 100%;
+    transition: 0.5s;
+}
+
+.submit:hover {
+    box-shadow: 0px 5px 5px var(--primary-color-shadow-1);
+}
+
+.submit h1 {
+    transform: translateY(5px);
+}
+
+
+
+// Change Button: change to Register component
+.change-component {
+    // position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
+    user-select: none;
+    color: var(--primary-color-text);
+    p {
+        span {
+            color: var(--primary-color-item);
+            cursor: pointer;
+            transition: 0.5s;
+            padding-left: 5px;
+        }
+
+        span:hover {
+            color: var(--primary-color-item-hover);
+        }
+    }
 }

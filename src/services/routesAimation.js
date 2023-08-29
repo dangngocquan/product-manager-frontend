@@ -17,6 +17,17 @@ export default {
     // Page home
     home: {
         productList: {
+            left: {
+                offscreen: {
+                    x: "-100%"
+                },
+                onscreen: {
+                    x: "0%",
+                    transition: {
+                        duration: 1.5
+                    }
+                }
+            },
             categoryName: {
                 offscreen: {
                     x: "-95%"

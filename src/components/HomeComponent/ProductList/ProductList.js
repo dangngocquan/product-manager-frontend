@@ -68,15 +68,18 @@ function ProductList({category}) {
 
     return (
         <div className={cx("wrapper")}>
-            <div 
+            <motion.div 
                 className={cx("left")} 
                 onClick={handleButtonLeft}
                 ref={(element) => refButtons.current[0] = element}
+                variants={services.routeAnimations.home.productList.left}
+                initial="offscreen"
+                whileInView="onscreen"
             >
                 <Button>
                     {Icons.ArrowLeft}
                 </Button>
-            </div>
+            </motion.div>
                 
             <div 
                 ref={refContainer}

@@ -22,12 +22,11 @@
 }
 
 .wrapper:hover {
-    box-shadow: 0px 10px 10px #fff;
-    transform: translateY(-10px);
     .heading {
         color: var(--primary-color-item-hover);
     }
 }
+
 
 .back-home {
     text-decoration: none;
@@ -36,7 +35,7 @@
     width: 40px;
     height: 40px;
     background-color: transparent;
-    left: 0;
+    left: 5%;
     top: 0;
     align-items: center;
     justify-content: center;
@@ -58,7 +57,7 @@
 .heading {
     font-size: 5rem;
     text-align: center;
-    padding: 20px 0px;
+    padding: 10px 0px;
     color: var(--primary-color-text);
     transition: 2s;
     user-select: none;
@@ -112,7 +111,11 @@
     transition: 0.3s;
     margin-right: 10px;
     font-size: 1.6rem;
-    color: var(--primary-color-text)
+    color: var(--primary-color-text);
+}
+
+.field-input[type="password"] {
+    padding-right: 40px;
 }
 
 .field-input::placeholder {
@@ -152,6 +155,29 @@
     color: var(--primary-color-text);
 }
 
+.eye {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    right: 0px;
+    transform: translate(-100%, -2px);
+    cursor: pointer;
+    * {
+        height: 60%;
+        width: 60%;
+        transition: 0.3s;
+    }
+}
+
+.eye:hover {
+    * {
+        opacity: 0.7;;
+    }
+}
+
 .field-message {
     position: absolute;
     color: var(--primary-color-invalid-message);
@@ -176,7 +202,6 @@
     height: 1.6rem;
     color: var(--primary-color-invalid-message);
     font-size: 1.4rem;
-    transform: translate(0px, 25px);
     user-select: none;
 }
 
@@ -185,7 +210,7 @@
 .wrapper-submit {
     width: 100px;
     height: 50px;
-    margin-top: 10%;
+    margin-top: 15px;
     background-image: linear-gradient(var(--color-1), var(--color-2));
 }
 
@@ -196,10 +221,34 @@
 }
 
 .submit:hover {
-    box-shadow: 0px 5px 10px var(--primary-color-shadow-2);
+    box-shadow: 0px 5px 5px var(--primary-color-shadow-1);
 }
 
 .submit h1 {
     transform: translateY(5px);
 }
 
+
+
+// Change Button: change to Register component
+.change-component {
+    // position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
+    user-select: none;
+    color: var(--primary-color-text);
+    p {
+        span {
+            color: var(--primary-color-item);
+            cursor: pointer;
+            transition: 0.5s;
+            padding-left: 5px;
+        }
+
+        span:hover {
+            color: var(--primary-color-item-hover);
+        }
+    }
+}

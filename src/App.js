@@ -6,7 +6,7 @@ import RoutesWithAnimation from "./components/RoutesWithAnimation";
 function App() {
   const [token, setToken] = useState(null);
   console.log("Re-render App Component");
-
+  
   return (
     <div className="App">
       <BrowserRouter>

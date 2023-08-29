@@ -4,11 +4,15 @@ import { motion } from 'framer-motion';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import services from "../../services";
+import { useRef, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
 
 function LoginComponent({setToken}) {
+    const [componentShowing, setComponentShowing] = useState(0); // 0: Sign In, 1: Sign Up
+
+
     return (
         <div
             className={cx("wrapper")}
@@ -19,19 +23,40 @@ function LoginComponent({setToken}) {
                 initial="offscreen"
                 whileInView="onscreen"
             >
-
                 <div
-                    className={cx("sign-in")}
+                    className={
+                        cx(
+                            "sign-in",
+                            {"container-in": componentShowing == 0},
+                            {"container-out": componentShowing != 0}
+                        )
+                    }
                 > 
                     <SignIn
                         setToken={setToken}
-                    ></SignIn>
+                        componentShowing={componentShowing}
+                        setComponentShowing={setComponentShowing}
+                    >
+
+                    </SignIn>
                 </div>
 
                 <div
-                    className={cx("sign-up")}
+                    className={
+                        cx(
+                            "sign-up",
+                            {"container-in": componentShowing == 1},
+                            {"container-out": componentShowing != 1}
+                        )
+                    }
                 >
-                    <SignUp></SignUp>
+                    <SignUp
+                        setToken={setToken}
+                        componentShowing={componentShowing}
+                        setComponentShowing={setComponentShowing}
+                    >
+        
+                    </SignUp>
             
                 </div>
 
