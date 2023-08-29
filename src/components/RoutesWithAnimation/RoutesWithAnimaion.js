@@ -1,7 +1,7 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import { publicRoutes } from "../../routes";
 
-function RoutesWithAnimation({token, setToken}) {
+function RoutesWithAnimation() {
     const location = useLocation();
     // console.log(location);
   
@@ -19,13 +19,9 @@ function RoutesWithAnimation({token, setToken}) {
                   path={route.path}
                   element={
                     <Layout
-                        token={token}
-                        setToken={setToken}
                     >
                       
                       <Page 
-                        token={token}
-                        setToken={setToken}
                       />
                       
                     </Layout>

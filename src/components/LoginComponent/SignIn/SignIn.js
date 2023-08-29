@@ -11,7 +11,7 @@ import {Link} from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 
-function SignIn({token, setToken, setComponentShowing}) {
+function SignIn({setComponentShowing}) {
     // console.log("Render");
     const username = useId();
     const password = useId();
@@ -65,7 +65,7 @@ function SignIn({token, setToken, setComponentShowing}) {
                                         // console.log("End handle in promise");
                                     } else {
                                         setMessageLoginStatus((prev) => res.message);
-                                        setToken((prev) => res.token);
+                                        localStorage.setItem("token", res.token);
                                         refBackHome.current.click();
                                         // console.log("Come to Home Page");
                                     }

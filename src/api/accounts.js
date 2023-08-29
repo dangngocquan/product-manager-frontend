@@ -24,7 +24,22 @@ async function signUp(data) {
   return fetch(apiURL, options);
 }
 
+async function getInformations(data) {
+  var apiURL = configs.api.root + `/accounts/informations`;
+  const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  return fetch(apiURL, options);
+}
+
+
+
 export default {
     login,
-    signUp
+    signUp,
+    getInformations
 }

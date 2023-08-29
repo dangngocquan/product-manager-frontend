@@ -9,7 +9,7 @@ import { useRef, useState } from 'react';
 const cx = classNames.bind(styles);
 
 
-function LoginComponent({setToken}) {
+function LoginComponent() {
     const [componentShowing, setComponentShowing] = useState(0); // 0: Sign In, 1: Sign Up
 
 
@@ -33,7 +33,6 @@ function LoginComponent({setToken}) {
                     }
                 > 
                     <SignIn
-                        setToken={setToken}
                         componentShowing={componentShowing}
                         setComponentShowing={setComponentShowing}
                     >
@@ -51,7 +50,6 @@ function LoginComponent({setToken}) {
                     }
                 >
                     <SignUp
-                        setToken={setToken}
                         componentShowing={componentShowing}
                         setComponentShowing={setComponentShowing}
                     >

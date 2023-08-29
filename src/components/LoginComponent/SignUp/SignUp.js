@@ -11,7 +11,7 @@ import {Link} from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 
-function SignUp({token, setToken, setComponentShowing}) {
+function SignUp({setComponentShowing}) {
     // console.log("Render");
     const username = useId();
     const password = useId();
@@ -75,7 +75,7 @@ function SignUp({token, setToken, setComponentShowing}) {
                                 api.accounts.login(formData)
                                     .then((res1) => res1.json())
                                     .then((res1) => {
-                                        setToken((prev) => res1.token);
+                                        localStorage.setItem("token", res1.token);
                                         refBackHome.current.click();
                                     })
                             } else {

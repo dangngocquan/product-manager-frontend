@@ -4,7 +4,7 @@ import styles from './LayoutBlank.module.scss';
 
 const cx = classNames.bind(styles);
 
-function LayoutBlank({setToken, children}) {
+function LayoutBlank({children}) {
     return (
         <div className={cx('wrapper')}>
            {children}

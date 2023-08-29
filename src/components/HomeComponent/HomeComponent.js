@@ -10,7 +10,7 @@ import services from '../../services';
 const cx = classNames.bind(styles);
 
 
-function HomeComponent({token, setToken}) {
+function HomeComponent() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
