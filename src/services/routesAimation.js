@@ -18,40 +18,55 @@ export default {
     home: {
         productList: {
             categoryName: {
-                initial: {
-                    translateX: "-200%"
+                offscreen: {
+                    x: "-95%"
                 },
-                final: {
-                    translateX: "0%",
+                onscreen: {
+                    x: "0%",
                     transition: {
-                        duration: 0.5
+                        duration: 1.5
                     }
                 }
             },
             products: {
-                initial: {
-                    opacity: 0
-                },
-                final: {
+                visible: {
                     opacity: 1,
                     transition: {
-                        duration: 2,
-                        delay: 0.5
+                        duration: 1.5
                     }
+                },
+                hidden: {
+                    opacity: 0
                 }
             },
             right: {
-                initial: {
-                    translateX: "400%"
+                offscreen: {
+                    x: "100%"
                 },
-                final: {
-                    translateX: "0%",
+                onscreen: {
+                    x: "0%",
                     transition: {
-                        duration: 0.5,
-                        delay: 2.5
+                        duration: 1.5
                     }
                 }
-            }
+            },
         }
+    },
+
+    // Page Login
+    login: {
+        container: {
+            offscreen: {
+                x: "95%",
+                opacity: 0
+            },
+            onscreen: {
+                x: "0%",
+                opacity: 1,
+                transition: {
+                    duration: 1
+                }
+            }
+        },
     }
 };

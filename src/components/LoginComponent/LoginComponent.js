@@ -1,7 +1,9 @@
 import styles from './LoginComponent.module.scss';
 import classNames from "classnames/bind";
+import { motion } from 'framer-motion';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
+import services from "../../services";
 
 const cx = classNames.bind(styles);
 
@@ -11,8 +13,11 @@ function LoginComponent({setToken}) {
         <div
             className={cx("wrapper")}
         >
-            <div
+            <motion.div
                 className={cx("container")}
+                variants={services.routeAnimations.login.container}
+                initial="offscreen"
+                whileInView="onscreen"
             >
 
                 <div
@@ -32,7 +37,7 @@ function LoginComponent({setToken}) {
 
             
             
-            </div>
+            </motion.div>
 
         </div>
     )

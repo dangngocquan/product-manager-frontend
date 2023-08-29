@@ -85,8 +85,8 @@ function ProductList({category}) {
                 <motion.div
                     className={cx("categoryName")}
                     variants={services.routeAnimations.home.productList.categoryName}
-                    initial="initial"
-                    animate="final"
+                    initial="offscreen"
+                    whileInView="onscreen"
                 >
                     <h1>{category.name}</h1>
                 </motion.div>
@@ -96,8 +96,8 @@ function ProductList({category}) {
                     ref={refProductContainer} 
                     className={cx("products")}
                     variants={services.routeAnimations.home.productList.products}
-                    initial="initial"
-                    animate="final"
+                    initial="hidden"
+                    whileInView="visible"
                 >
                     {
                         data.map((product, index) => {
@@ -119,8 +119,8 @@ function ProductList({category}) {
                 onClick={handleButtonRight}
                 ref={(element) => refButtons.current[1] = element}
                 variants={services.routeAnimations.home.productList.right}
-                initial="initial"
-                animate="final"
+                initial="offscreen"
+                whileInView="onscreen"
             >
                 <Button>
                     {Icons.ArrowRight}
