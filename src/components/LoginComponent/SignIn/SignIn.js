@@ -7,7 +7,6 @@ import services from '../../../services';
 import api from '../../../api';
 import configs from "../../../configs";
 import {Link} from 'react-router-dom';
-import { motion, useTime, useTransform } from 'framer-motion';
 
 const cx = classNames.bind(styles);
 
@@ -68,7 +67,7 @@ function SignIn({token, setToken, setComponentShowing}) {
                                         setMessageLoginStatus((prev) => res.message);
                                         setToken((prev) => res.token);
                                         refBackHome.current.click();
-                                        console.log("Come to Home Page");
+                                        // console.log("Come to Home Page");
                                     }
                                 })
                             

@@ -12,6 +12,19 @@ async function login(data) {
     return fetch(apiURL, options);
 }
 
+async function signUp(data) {
+  var apiURL = configs.api.root + `/accounts`;
+  const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  return fetch(apiURL, options);
+}
+
 export default {
-    login
+    login,
+    signUp
 }

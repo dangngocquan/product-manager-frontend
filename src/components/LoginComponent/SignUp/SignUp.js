@@ -65,8 +65,27 @@ function SignUp({token, setToken, setComponentShowing}) {
                 if (refPassword.current.value == refConfirmPassword.current.value) {
                     var formData = {
                         "username": refUsername.current.value,
-                        "password": refPassword.current.value
+                        "password": refPassword.current.value,
+                        "nickname": refUsername.current.value
                     }
+                    api.accounts.signUp(formData)
+                        .then(function (res) {
+                            if (res.status === 201) {
+                                // Created account, then login
+                                api.accounts.login(formData)
+                                    .then((res1) => res1.json())
+                                    .then((res1) => {
+                                        setToken((prev) => res1.token);
+                                        refBackHome.current.click();
+                                    })
+                            } else {
+                                res.json()
+                                    .then((res) => {
+                                        setMessageLoginStatus((prev) => res.message);
+                                    })
+                            }
+                        })
+
                 } else {
                     if (messagePassword !== "Password and confirm password don't match.") {
                         setMessageConfirmPassword((prev) => "Password and confirm password don't match.");
