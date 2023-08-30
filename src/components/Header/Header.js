@@ -73,11 +73,24 @@ function Header() {
 
 
 
-            <div
+            <ul
                 className={cx("nav")}
             >
 
-            </div>
+                <li
+                >
+                    <Link
+                        to={configs.routes.home}
+                    >
+                        Home
+                    </Link>
+                </li>
+                <li>About</li>
+                <li>Products</li>
+                <li>News</li>
+                <li>Contact</li>
+
+            </ul>
 
 
 
@@ -89,12 +102,16 @@ function Header() {
                     )}
                 to={configs.routes.login}
             >
-                {Icons.Login}
-                <div
+                <ul
                     className={cx("textLogin")}
                 >
-                    Sign in / Sign up
-                </div>
+                    <li>
+                        <p>Sign In</p>
+                    </li>
+                    <li>
+                        <p>Sign Up</p>  
+                    </li>
+                </ul>
             </Link>
 
             
