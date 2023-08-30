@@ -12,22 +12,43 @@ import { useEffect, useState } from "react";
 const cx = classNames.bind(styles);
 
 function Header() {
-    // console.log("render Header");
+    console.log("render Header");
 
     const [accountInformations, setAccountInformations] = useState({});
+    const [isHiddenUserProfileOptions, setIsHiddenUserProfileOptions] = useState(true);
     
     useEffect(() => {
         // console.log("Effect in Header component");
-        if (localStorage.getItem("token") != null) {
+        if (localStorage.getItem("token") !== null) {
             api.accounts.getInformations({
                 "token": localStorage.getItem("token")       
             })
-            .then((res) => res.json())
-            .then((res) => {
-                setAccountInformations(res.informations);
-            })
+            .then(
+                (res) => {
+                    if (res.status == 200) {
+                        return res.json()
+                            .then((res) => {
+                                setAccountInformations(res.informations);
+                            })
+                    } else {
+                        localStorage.removeItem("token");
+                        setAccountInformations((prev) => ({
+                            "something": "something"
+                        }))
+                    }
+                }
+            )
         }
     }, [])
+
+
+    function handleUserProfileOnClick() {
+        setIsHiddenUserProfileOptions((prev) => !prev);
+    }
+
+    function handleSignOutOnClick() {
+        localStorage.removeItem("token");
+    }
   
     return (
         <motion.div 
@@ -49,10 +70,22 @@ function Header() {
                 </Image>
             </Link>
 
+
+
+
+            <div
+                className={cx("nav")}
+            >
+
+            </div>
+
+
+
+
             <Link
                 className={cx(
                     "buttonLogin",
-                    {"hidden": localStorage.getItem("token") != undefined}
+                    {"hidden": localStorage.getItem("token") !== null}
                     )}
                 to={configs.routes.login}
             >
@@ -64,18 +97,47 @@ function Header() {
                 </div>
             </Link>
 
-            <Link
+            
+
+            <div
                 className={cx(
                     "user-profile",
-                    {"hidden": localStorage.getItem("token") == undefined}
-                    )}
+                    {"hidden": localStorage.getItem("token") === null}
+                )}
+                onClick={handleUserProfileOnClick}
             >   
                 <Image
-                    imgName={localStorage.getItem("token") == null? "" : accountInformations.portrait}
+                    imgName={accountInformations?.portrait || "default-portrait.jpg"}
                 >
 
                 </Image>
-            </Link>
+
+                <p>You</p>
+
+                <ul
+                    className={cx(
+                        "user-profile-options",
+                        {"hidden": isHiddenUserProfileOptions}
+                    )}
+                >
+
+                    <li>Your profile</li>
+                    <li
+                        onClick={handleSignOutOnClick}
+                    >
+                        <Link
+                            to={configs.routes.home}
+                        >
+                            Sign out
+                        </Link>
+                        
+                        
+                    </li>
+
+                </ul>
+            </div>
+
+
 
 
         </motion.div>

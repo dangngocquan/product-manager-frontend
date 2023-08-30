@@ -30,12 +30,12 @@ export default {
             },
             categoryName: {
                 offscreen: {
-                    x: "-95%"
+                    x: "-50%"
                 },
                 onscreen: {
                     x: "0%",
                     transition: {
-                        duration: 1.5
+                        duration: 1
                     }
                 }
             },

@@ -16,6 +16,7 @@
     height: calc(0.8 * var(--default-layout-header-height));
     width: calc(0.8 * var(--default-layout-header-height));
     margin-left: 20px;
+    margin-right: 20px;
 }
 
 
@@ -55,12 +56,87 @@
     }
 }
 
-.user-profile {
-    height: calc(0.8 * var(--default-layout-header-height));
-    width: calc(0.8 * var(--default-layout-header-height));
-    margin-right: 20px;
+.nav {
+    height: var(--default-layout-header-height);
+    flex: 1;
+    background-color: #fff;
 }
+
+.user-profile {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: calc(0.5 * var(--default-layout-header-height));
+    width: calc(0.5 * var(--default-layout-header-height));
+    margin-right: 20px;
+    margin-left: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    > :nth-child(1) {
+        border-radius: 50%;
+    }
+    > :nth-child(1):hover ~ :nth-child(2) {
+        color: var(--primary-color-item-hover)    
+    }
+    > :nth-child(2) {
+        color: var(--primary-color-item);
+        transition: 0.5s;
+    }
+    > :nth-child(2):hover {
+        color: var(--primary-color-item-hover)    
+    }
+}
+
+
+.user-profile-options {
+    position: absolute;
+    display: flex;
+    width: 150px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    right: 20px;
+    top: calc(var(--default-layout-header-height) + 10px);
+    background-color: #fff;
+    list-style-type: none;
+    * {
+        text-decoration: none;
+    }
+    > li {
+        padding-left: 10px;
+        height: 30px;
+        line-height: 30px;
+        * {
+            color: var(--black-color-1);
+        }
+    }
+    > li:hover {
+        color: var(--primary-color-item-hover);
+        * {
+            color: var(--primary-color-item-hover);
+        }
+    }
+    box-shadow: 0px 5px 20px var(--primary-color-shadow-1);
+    animation: fadeIn 0.5s;
+}
+
 
 .hidden {
     display: none;
+}
+
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translate(0px, -20px);
+        box-shadow: 0px 0px 0px var(--primary-color-shadow-1);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0px, 0px);
+        box-shadow: 0px 5px 20px var(--primary-color-shadow-1);
+    }
 }
