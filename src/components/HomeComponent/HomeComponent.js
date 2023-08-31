@@ -29,6 +29,7 @@ function HomeComponent() {
                 <Slider></Slider>
             </div>
 
+
             <div 
                 className={cx("container")}
             >

@@ -1,4 +1,4 @@
-import {BsChevronLeft, BsChevronRight} from 'react-icons/bs';
+import {BsChevronLeft, BsChevronRight, BsGithub, BsTwitter} from 'react-icons/bs';
 import {RiLoginBoxLine, RiLockPasswordFill} from 'react-icons/ri';
 import {FaUserAlt} from 'react-icons/fa';
 import {ImHome} from 'react-icons/im';
@@ -14,5 +14,7 @@ export default {
     Password: <RiLockPasswordFill/>,
     Home: <ImHome/>,
     Eye: <AiFillEye />,
-    EyeInvisible: <AiFillEyeInvisible/>
+    EyeInvisible: <AiFillEyeInvisible/>,
+    Github: <BsGithub />,
+    Twitter: <BsTwitter/>
 }
