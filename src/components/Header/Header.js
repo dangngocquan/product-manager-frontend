@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 const cx = classNames.bind(styles);
 
 function Header() {
-    console.log("render Header");
+    // console.log("render Header");
 
     const [accountInformations, setAccountInformations] = useState({});
     const [isHiddenUserProfileOptions, setIsHiddenUserProfileOptions] = useState(true);

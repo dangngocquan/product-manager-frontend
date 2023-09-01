@@ -10,6 +10,7 @@ import LayoutBlank from '../layouts/LayoutBlank';
 import Home from '../pages/Home';
 import Categories from '../pages/Categories';
 import LoginComponent from '../pages/Login';
+import ProductInformations from '../pages/ProductInformations';
 
 // Public routes
 const publicRoutes = [
@@ -27,6 +28,11 @@ const publicRoutes = [
         path: configs.routes.login,
         component: LoginComponent,
         layout: LayoutBlank
+    },
+    {
+        path: configs.routes.productInformations,
+        component: ProductInformations,
+        layout: DefaultLayout
     }
 ];
 

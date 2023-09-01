@@ -1,6 +1,9 @@
+import { func } from 'prop-types';
 import Image from '../../../Image';
 import styles from './Product.module.scss';
 import classNames from "classnames/bind";
+import { Link } from 'react-router-dom';
+import configs from '../../../../configs';
 // import image from "../img1692786236.268246.jpg";
 
 
@@ -8,41 +11,52 @@ const cx = classNames.bind(styles);
 
 
 function Product({innerRef, index,  product}) {
+    function handleOnClick() {
+        localStorage.setItem("productInformations", product.id);
+    }
+
     return (
         <div 
             className={cx("wrapper")}
             ref={(element) => innerRef[index] = element}
         >
-            <div 
-                className={cx("image")}
+            <Link
+                className={cx("link")}
+                to={configs.routes.productInformations}
+                onClick={handleOnClick}
             >
-                <Image 
-                    imgName={product.image}
+                <div 
+                    className={cx("image")}
                 >
+                    <Image 
+                        imgName={product.image}
+                    >
 
-                </Image>
-            </div>
-
-            <div 
-                className={cx("name")}
-            >
-                <h1>{product.name}</h1>
-            </div>
-
-            <div 
-                className={cx("detail")}
-            >
-                <div
-                    className={cx("price")}
-                >
-                    {`${product.currency} ${product.price}`}
+                    </Image>
                 </div>
-                <div
-                    className={cx("sold")}
+
+                <div 
+                    className={cx("name")}
                 >
-                    {`${product.sold === undefined? 0 : product.sold} sold`}
+                    <h1>{product.name}</h1>
                 </div>
-            </div>
+
+                <div 
+                    className={cx("detail")}
+                >
+                    <div
+                        className={cx("price")}
+                    >
+                        {`${product.currency} ${product.price}`}
+                    </div>
+                    <div
+                        className={cx("sold")}
+                    >
+                        {`${product.sold === undefined? 0 : product.sold} sold`}
+                    </div>
+                </div>
+            
+            </Link>
            
         </div>
     )
