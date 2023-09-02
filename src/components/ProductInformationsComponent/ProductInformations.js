@@ -57,8 +57,20 @@ function ProductInformations() {
                         className={cx("product-content")}
                     >
                         <p>{product.name}</p>
-                        <p>{product.currency} {product.price}</p>
+                        <p>{product.currency}{product.price}</p>
                         <p>{product.description}</p>
+
+                        <div
+                            className={cx("product-variants")}
+                        >
+
+                        </div>
+
+                        <div
+                            className={cx("product-options")}
+                        >
+
+                        </div>
 
                     </div>
 

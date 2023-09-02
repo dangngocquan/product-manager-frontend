@@ -47,7 +47,7 @@ function Product({innerRef, index,  product}) {
                     <div
                         className={cx("price")}
                     >
-                        {`${product.currency} ${product.price}`}
+                        {`${product.currency}${product.price}`}
                     </div>
                     <div
                         className={cx("sold")}
