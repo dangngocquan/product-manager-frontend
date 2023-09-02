@@ -1,30 +1,65 @@
 import styles from './ProductInformations.module.scss';
 import classNames from "classnames/bind";
 import { motion } from 'framer-motion'; 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from '../Image';
+import api from '../../api';
+import ProductVariation from './ProductVariations';
+import ProductOptionals from './ProductOptionals/ProductOptionals';
 
 const cx = classNames.bind(styles);
 
 
 function ProductInformations() {
-    window.scrollTo({
-        top: 0, 
-        behavior: "smooth" 
-    })
-
-
-    var product = {
-        "id": "12",
-        "shop_id": "1",
-        "name": "Dell Latitude 9440 2-in-1, i7, 512GB SSD, 16GB RAM",
-        "image": "default-product-image.png",
-        "price": "59",
-        "currency": "$",
-        "stock": "100",
-        "time_added": "1692866343.738955",
-        "description": "Maximum performance and scalability. Ultimate security to work from anywhere. Innovating with sustainability."
+    var infors = {
+        "products": [
+            {
+                "id": "1",
+                "shop_id": "1",
+                "name": "",
+                "image": "default-product-image.png",
+                "price": "",
+                "currency": "",
+                "stock": "",
+                "time_added": "",
+                "description": ""
+            }
+        ],
+        "productsImages": [
+            {
+                "id": "1",
+                "product_id": "1",
+                "image": "default-product-image.png"
+            }
+        ],
+        "productVariations": [
+            {
+                "id": "1",
+                "product_id": "1",
+                "attributes": {
+                    "": ""
+                },
+                "price": ""
+            }
+        ]
     }
+
+
+    const [productInformations, setProductInformations] = useState(infors);
+
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        api.products.getProductInformationsById(localStorage.getItem("productInformations"))
+        .then((res) => {
+            if (res.status == 200) {
+                res.json()
+                .then((res) => {
+                    setProductInformations((prev) => res.informations);
+                })
+            }
+        })
+    }, [])
 
     
 
@@ -47,7 +82,7 @@ function ProductInformations() {
                         <div
                             className={cx("product-image-showing")}
                         >
-                            <Image imgName={product.image}></Image>
+                            <Image imgName={productInformations.products[0].image}></Image>
 
                         </div>
 
@@ -56,19 +91,29 @@ function ProductInformations() {
                     <div
                         className={cx("product-content")}
                     >
-                        <p>{product.name}</p>
-                        <p>{product.currency}{product.price}</p>
-                        <p>{product.description}</p>
+                        <p>{productInformations.products[0].name}</p>
+                        <p>{productInformations.products[0].currency}{productInformations.products[0].price}</p>
+                        <p>{productInformations.products[0].description}</p>
 
                         <div
-                            className={cx("product-variants")}
+                            className={cx("product-variations")}
                         >
+                            <ProductVariation
+                                // productVariations={productInformations.productVariations}
+                            >
+
+                            </ProductVariation>
 
                         </div>
 
                         <div
-                            className={cx("product-options")}
+                            className={cx("product-optionals")}
                         >
+                            <ProductOptionals
+                                
+                            >
+
+                            </ProductOptionals>
 
                         </div>
 

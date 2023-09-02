@@ -4,7 +4,6 @@ import styles from './Product.module.scss';
 import classNames from "classnames/bind";
 import { Link } from 'react-router-dom';
 import configs from '../../../../configs';
-// import image from "../img1692786236.268246.jpg";
 
 
 const cx = classNames.bind(styles);

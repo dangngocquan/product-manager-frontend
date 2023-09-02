@@ -8,6 +8,13 @@ async function getLastestProductsByCategoryId(categoryId = 0) {
         })
 }
 
+
+async function getProductInformationsById(id = 1) {
+    var apiURL = configs.api.root + `/products/id/${id}`;
+    return fetch(apiURL);
+}
+
 export default {
-    getLastestProductsByCategoryId
+    getLastestProductsByCategoryId,
+    getProductInformationsById
 }
