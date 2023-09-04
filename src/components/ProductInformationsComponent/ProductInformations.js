@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import Image from '../Image';
 import api from '../../api';
 import ProductVariation from './ProductVariations';
-import ProductOptionals from './ProductOptionals/ProductOptionals';
 
 const cx = classNames.bind(styles);
 
@@ -35,11 +34,27 @@ function ProductInformations() {
         "productVariations": [
             {
                 "id": "1",
-                "product_id": "1",
-                "attributes": {
-                    "": ""
-                },
-                "price": ""
+                "price": "459",
+                "variant_value_ids": [
+                    "1",
+                    "2",
+                    "3"
+                ],
+                "variant_value_names": [
+                    "black",
+                    "normal",
+                    "normal"
+                ],
+                "variant_ids": [
+                    "1",
+                    "2",
+                    "3"
+                ],
+                "variant_names": [
+                    "color",
+                    "size",
+                    "type"
+                ]
             }
         ]
     }
@@ -92,30 +107,28 @@ function ProductInformations() {
                         className={cx("product-content")}
                     >
                         <p>{productInformations.products[0].name}</p>
-                        <p>{productInformations.products[0].currency}{productInformations.products[0].price}</p>
                         <p>{productInformations.products[0].description}</p>
 
                         <div
                             className={cx("product-variations")}
                         >
                             <ProductVariation
-                                // productVariations={productInformations.productVariations}
+                                productVariations={productInformations.productVariations}
+                                product={productInformations.products[0]}
                             >
 
                             </ProductVariation>
 
                         </div>
 
-                        <div
-                            className={cx("product-optionals")}
-                        >
-                            <ProductOptionals
-                                
-                            >
+    
 
-                            </ProductOptionals>
+                    </div>
 
-                        </div>
+
+                    <div
+
+                    >
 
                     </div>
 
