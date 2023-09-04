@@ -6,7 +6,7 @@
     width: 100%;
     // height: 1000px;
     min-width: var(--min-width);
-    background-color: #333;
+    background-color: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,7 +24,7 @@
 .product-main {
     display: flex;;
     width: 100%;
-    background-color: antiquewhite;
+    // background-color: antiquewhite;
     margin: 40px 0px;
 }
 
@@ -35,14 +35,14 @@
     width: 40%;
     height: 32vw;
     min-height: calc(0.32 * var(--min-width));
-    background-color: beige;
+    // background-color: beige;
 }
 
 .product-image-showing {
     height: 28.8vw;
     min-height: 90%;
     width: 90%;
-    background-color: aqua;
+    // background-color: aqua;
 }
 
 .product-content {
@@ -69,7 +69,7 @@
 .product-variations {
     width: 100%;
     // height: 300px;
-    background-color: beige;
+    // background-color: beige;
 }
 
 

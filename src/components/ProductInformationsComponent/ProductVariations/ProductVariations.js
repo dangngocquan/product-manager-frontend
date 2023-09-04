@@ -1,14 +1,16 @@
 import styles from './ProductVariations.module.scss';
 import classNames from "classnames/bind";
 import { motion } from 'framer-motion'; 
-import { useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import Image from '../../Image';
 import api from '../../../api';
+import Icons from '../../Icon';
+import Button from '../../Button';
 
 const cx = classNames.bind(styles);
 
 
-function ProductVariation({productVariations = [], product = null}) {
+const ProductVariation = memo(function ProductVariation({productVariations = [], product = null}) {
     if (productVariations.length == 0) {
         productVariations = [
             {
@@ -112,19 +114,6 @@ function ProductVariation({productVariations = [], product = null}) {
         };
     }
 
-    const [infors, setInfors] = useState(createObjInfors);
-
-
-    // 0: value normal
-    // 1: value selected
-    // -1: value unable
-    const [variantValuesStatus, setVariantValuesStatus] = useState(createVariantValuesStatus);
-
-    if (infors.productId != product.id) { 
-        var objInfors = createObjInfors();
-        setInfors((prev) => objInfors);
-        setVariantValuesStatus((prev) => createVariantValuesStatus(objInfors));
-    }
 
     function handleAttributeValueOnClick(variantNameIndex, variantValueNameIndex) {
         return function () {
@@ -198,16 +187,44 @@ function ProductVariation({productVariations = [], product = null}) {
         return product.price;
     }
 
-    console.log(infors);
+    function increaseQuantity() {
+        setQuantity((prev) => prev + 1);
+    }
+
+    function decreaseQuantity() {
+        setQuantity((prev) => Math.max(prev - 1, 1));
+    }
+
+
+    const [infors, setInfors] = useState(createObjInfors);
+
+    // 0: value normal
+    // 1: value selected
+    // -1: value unable
+    const [variantValuesStatus, setVariantValuesStatus] = useState(createVariantValuesStatus);
+
+    const [quantity, setQuantity] = useState(1);
+
+    if (infors.productId != product.id) { 
+        var objInfors = createObjInfors();
+        setInfors((prev) => objInfors);
+        setVariantValuesStatus((prev) => createVariantValuesStatus(objInfors));
+    }
+
+    
+
 
     return (
         <div
             className={cx("wrapper")}
         >   
 
+
             <div
-                className={cx("variantions")}
+                className={cx("variations")}
             >
+
+                <p>Product Variants</p>
 
                 {
                     infors.variantNames.map((variantName, variantNameIndex) => {
@@ -241,7 +258,7 @@ function ProductVariation({productVariations = [], product = null}) {
                                                 )}
                                                 key={variantValueIndex}
                                                 onClick={
-                                                    variantValuesStatus["status"][variantNameIndex][variantValueIndex] != -1?
+                                                    variantValuesStatus["status"][variantNameIndex][variantValueIndex] == 0?
                                                     handleAttributeValueOnClick(variantNameIndex, variantValueIndex) : () => {}
                                                 }
                                             >
@@ -266,6 +283,44 @@ function ProductVariation({productVariations = [], product = null}) {
             </div>
 
 
+
+            
+
+            <div
+                className={cx("quantity")}
+            >
+
+                <p>Quantity</p>
+
+                <div
+                    className={cx('quantity-controller')}
+                    onClick={decreaseQuantity}
+                >
+                    <Button>
+                        {Icons.Minus}
+                    </Button>
+                </div>
+
+                <div
+                    className={cx("quantity-value")}
+                >
+                    {quantity}
+                </div>
+
+                <div
+                    className={cx('quantity-controller')}
+                    onClick={increaseQuantity}
+                >
+                    <Button>
+                        {Icons.Plus}
+                    </Button>
+                    
+                </div>
+
+            </div>
+
+
+
             <div
                 className={cx("price")}
             >
@@ -279,9 +334,30 @@ function ProductVariation({productVariations = [], product = null}) {
                     }
                 </p>
             </div>
+
+
+
+            <div
+                className={cx("order-or-cart")}
+            >
+                <div
+                    className={cx("order-or-cart-item")}
+                >
+                    {Icons.CartPlus}
+                    <p>Add To Cart</p>
+                </div>
+
+                <div
+                    className={cx("order-or-cart-item")}
+                >
+                    {Icons.Cart}
+                    <p>Buy Now</p>
+                </div>
+                
+            </div>
             
         </div>
     )
-}
+})
 
 export default ProductVariation;

@@ -1,8 +1,8 @@
-import {BsChevronLeft, BsChevronRight, BsGithub, BsTwitter} from 'react-icons/bs';
+import {BsChevronLeft, BsChevronRight, BsGithub, BsTwitter, BsCartPlus, BsCart4} from 'react-icons/bs';
 import {RiLoginBoxLine, RiLockPasswordFill} from 'react-icons/ri';
 import {FaUserAlt} from 'react-icons/fa';
 import {ImHome} from 'react-icons/im';
-import {AiFillEye, AiFillEyeInvisible} from 'react-icons/ai';
+import {AiFillEye, AiFillEyeInvisible, AiOutlinePlus, AiOutlineMinus} from 'react-icons/ai';
 
 
 
@@ -16,5 +16,9 @@ export default {
     Eye: <AiFillEye />,
     EyeInvisible: <AiFillEyeInvisible/>,
     Github: <BsGithub />,
-    Twitter: <BsTwitter/>
+    Twitter: <BsTwitter/>,
+    Plus: <AiOutlinePlus/>,
+    Minus: <AiOutlineMinus/>,
+    CartPlus: <BsCartPlus/>,
+    Cart: <BsCart4/>
 }

@@ -11,6 +11,7 @@
     --gray-color-5: #F2F2F2;
     --white-color-1: #ffffff;
     --green-color-1: #32CD32;
+    --green-color-2: #b1ecb1;
     --red-color-1: #DC143C;
     --primary-color: var(--gray-color-3);
     --primary-color-item: var(--white-color-1);
@@ -25,10 +26,12 @@
         // Color use in page ProductInformations
     --primary-background-color-variant-value: #fff;
     --primary-background-color-variant-value-hover: #ccc;
-    --primary-background-color-variant-value-selected: var(--green-color-1);
-    --primary-background-color-variant-value-unabled: var(--gray-color-2);
-    --primary-border-color-variant-value: var(--gray-color-1);
+    --primary-background-color-variant-value-selected: var(--green-color-2);
+    --primary-background-color-variant-value-unabled: var(--gray-color-5);
+    --primary-border-color-variant-value: var(--gray-color-4);
     --primary-border-color-variant-value-selected: var(--primary-color-item-hover);
+    --primary-border-color-variant-value-unabled: var(--gray-color-5);
+    --primary-text-color-variant-value-unabled: var(--gray-color-4);
     
     // Sizes
     --default-layout-header-height: 90px;
