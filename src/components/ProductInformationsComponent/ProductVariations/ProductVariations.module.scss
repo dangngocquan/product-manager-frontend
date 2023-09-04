@@ -36,21 +36,36 @@
     text-transform: capitalize;
     margin: 5px 10px;
     padding: 10px 20px;
-    background-color: #fff;
+    background-color: var(--primary-background-color-variant-value);
     max-width: 40%;
     overflow: hidden;
     transition: 0.2s;
+    border: 1px solid var(--primary-border-color-variant-value);
+    cursor: pointer;
 }
 
 .attribute-value:hover {
-    cursor: pointer;
-    background-color: #878787;
+    background-color: var(--primary-background-color-variant-value-hover);
 }
 
 .attribute-value-selected {
-    background-color: #878787;
+    background-color: var(--primary-background-color-variant-value-selected);
+    cursor: pointer;
 }
 
+.attribute-value-selected:hover {
+    background-color: var(--primary-background-color-variant-value-selected);
+}
+
+.attribute-value-unable {
+    background-color: var(--primary-background-color-variant-value-unabled);
+    cursor: default;
+}
+
+.attribute-value-unable:hover {
+    background-color: var(--primary-background-color-variant-value-unabled);
+    cursor: default;
+}
 
 
 .price {

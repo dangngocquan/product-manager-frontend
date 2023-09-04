@@ -22,6 +22,13 @@
     --primary-color-cursor-1: var(--black-color-1);
     --primary-color-cursor-2: var(--white-color-1);
     --primary-color-invalid-message: var(--red-color-1);
+        // Color use in page ProductInformations
+    --primary-background-color-variant-value: #fff;
+    --primary-background-color-variant-value-hover: #ccc;
+    --primary-background-color-variant-value-selected: var(--green-color-1);
+    --primary-background-color-variant-value-unabled: var(--gray-color-2);
+    --primary-border-color-variant-value: var(--gray-color-1);
+    --primary-border-color-variant-value-selected: var(--primary-color-item-hover);
     
     // Sizes
     --default-layout-header-height: 90px;

@@ -9,7 +9,6 @@ const cx = classNames.bind(styles);
 
 
 function ProductVariation({productVariations = [], product = null}) {
-    console.log("Product variant render");
     if (productVariations.length == 0) {
         productVariations = [
             {
@@ -52,41 +51,65 @@ function ProductVariation({productVariations = [], product = null}) {
 
         var prices = [];
         var variantValueNames = [];
-        variantNames.forEach(() => {variantValueNames.push([])});
+        var variantValueIds = [];
+        variantNames.forEach(() => {
+            variantValueNames.push([]);
+            variantValueIds.push([]);
+        });
         productVariations.forEach((productVariant) => {
             prices.push(productVariant['price']);
-            var thisVariantValueNames = productVariant['variant_value_names'];
+
             var thisVariantNames = productVariant['variant_names'];
+
+            var thisVariantValueNames = productVariant['variant_value_names'];
             thisVariantValueNames.forEach((variantValueName, variantValueIndex) => {
                 var variantName = thisVariantNames[variantValueIndex];
                 var index = variantNames.indexOf(variantName);
                 variantValueNames[index].push(variantValueName);
             })
+
+            var thisVariantValueIds = productVariant['variant_value_ids'];
+            thisVariantValueIds.forEach((variantValueId, variantValueIndex) => {
+                var variantName = thisVariantNames[variantValueIndex];
+                var index = variantNames.indexOf(variantName);
+                variantValueIds[index].push(variantValueId);
+            })
         })
+
         variantValueNames.forEach((values, index) => {
             variantValueNames[index] = [...new Set(values)];
+        })
+        variantValueIds.forEach((ids, index) => {
+            variantValueIds[index] = [...new Set(ids)];
         })
 
         return {
             productId,
             variantNames,
             variantValueNames,
+            variantValueIds,
             prices
         };
     }
 
-    function createMatrixVariantValuesStatus(objInfors) {
+    function createVariantValuesStatus(objInfors) {
         if (objInfors == undefined || objInfors == null) {
             objInfors = infors;
         }
         var matrix = [];
+        var selectedIds = [];
         objInfors.variantValueNames.forEach((rowVariantValueNames, index) => {
             matrix.push([]);
             rowVariantValueNames.forEach(() => {
                 matrix[index] = [...matrix[index], 0];
             })
+            selectedIds.push(-1);
         })
-        return matrix;
+
+        return {
+            status: matrix,
+            selectedIds: selectedIds
+        };
     }
 
     const [infors, setInfors] = useState(createObjInfors);
@@ -95,27 +118,87 @@ function ProductVariation({productVariations = [], product = null}) {
     // 0: value normal
     // 1: value selected
     // -1: value unable
-    const [variantValuesStatus, setVariantValuesStatus] = useState(createMatrixVariantValuesStatus);
+    const [variantValuesStatus, setVariantValuesStatus] = useState(createVariantValuesStatus);
 
     if (infors.productId != product.id) { 
         var objInfors = createObjInfors();
         setInfors((prev) => objInfors);
-        setVariantValuesStatus((prev) => createMatrixVariantValuesStatus(objInfors));
+        setVariantValuesStatus((prev) => createVariantValuesStatus(objInfors));
     }
 
     function handleAttributeValueOnClick(variantNameIndex, variantValueNameIndex) {
         return function () {
-            var newVariantValuesStatus = [...variantValuesStatus];
-            newVariantValuesStatus[variantNameIndex].forEach((value, index) => {
+            var newVariantValuesStatus = {...variantValuesStatus};
+            var status = newVariantValuesStatus["status"];
+            var selectedIds = newVariantValuesStatus["selectedIds"];
+            status[variantNameIndex].forEach((value, index) => {
                 if (index == variantValueNameIndex) {
-                    newVariantValuesStatus[variantNameIndex][index] = 1;
+                    status[variantNameIndex][index] = 1;
                 } else {
-                    newVariantValuesStatus[variantNameIndex][index] = 0;
+                    status[variantNameIndex][index] = 0;
                 }
             })
+            selectedIds[variantNameIndex] = infors["variantValueIds"][variantNameIndex][variantValueNameIndex];
+
+
+            fillVariantValuesUnable(newVariantValuesStatus);
+
             setVariantValuesStatus((prev) => newVariantValuesStatus);
         }
     }
+
+    function fillVariantValuesUnable(variantValuesStatus0, infors0) {
+        if (variantValuesStatus0 == null || variantValuesStatus0 == undefined) {
+            variantValuesStatus0 = variantValuesStatus
+        }
+
+        if (infors0 == null || infors0 == undefined) {
+            infors0 = infors
+        }
+
+        var status = variantValuesStatus0["status"];
+        var selectedIds = variantValuesStatus0["selectedIds"];
+        var variantValueIds = infors0["variantValueIds"];
+
+        console.log("selectedIds: " + selectedIds);
+
+        for (var i = 0; i < status.length; i++) {
+            for (var j = 0; j < status[i].length; j++) {
+                if (status[i][j] == 1) continue;
+
+                var selectedIds0 = [...selectedIds];
+                selectedIds0[i] = variantValueIds[i][j];
+                var isExistCase = productVariations.some((productVariant) => {
+                    var variantValueIds0 = productVariant["variant_value_ids"];
+                    return selectedIds0.every((id) => {
+                        return variantValueIds0.includes(id) || id == -1;
+                    })
+                })
+                console.log("row " + i + " column " + j + " isExistCase " + isExistCase)
+
+                if (isExistCase) {
+                    status[i][j] = 0;
+                } else {
+                    status[i][j] = -1;
+                }
+                
+            }
+        }
+    }
+
+    function getCurrentPrice() {
+        for (var productVariant of productVariations) {
+            var variantValueIds0 = productVariant['variant_value_ids'];
+            var isSelected = variantValueIds0.every((id) => {
+                return variantValuesStatus['selectedIds'].includes(id);
+            });
+
+            if (isSelected) return productVariant['price'];
+        }
+        return product.price;
+    }
+
+    console.log(infors);
 
     return (
         <div
@@ -153,10 +236,14 @@ function ProductVariation({productVariations = [], product = null}) {
                                             <li
                                                 className={cx(
                                                     "attribute-value",
-                                                    {"attribute-value-selected": variantValuesStatus[variantNameIndex][variantValueIndex] == 1} 
+                                                    {"attribute-value-selected": variantValuesStatus["status"][variantNameIndex][variantValueIndex] == 1},
+                                                    {"attribute-value-unable": variantValuesStatus["status"][variantNameIndex][variantValueIndex] == -1} 
                                                 )}
                                                 key={variantValueIndex}
-                                                onClick={handleAttributeValueOnClick(variantNameIndex, variantValueIndex)}
+                                                onClick={
+                                                    variantValuesStatus["status"][variantNameIndex][variantValueIndex] != -1?
+                                                    handleAttributeValueOnClick(variantNameIndex, variantValueIndex) : () => {}
+                                                }
                                             >
                                                 <p>{variantValueName}</p>
                                             
@@ -186,7 +273,7 @@ function ProductVariation({productVariations = [], product = null}) {
                 <p>
                     {product.currency}
                     {
-                        Object.keys(infors.variantNames).length == 0? product.price : 0
+                        getCurrentPrice()
 
                         
                     }
