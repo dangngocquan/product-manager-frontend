@@ -6,7 +6,7 @@ import Button from '../../Button/Button';
 import services from '../../../services';
 import api from '../../../api';
 import configs from "../../../configs";
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -28,6 +28,8 @@ function SignUp({setComponentShowing}) {
     const [messageLoginStatus, setMessageLoginStatus] = useState("");
     const [isHiddenPassword, setIsHiddenPassword] = useState(true);
     const [isHiddenConfirmPassword, setIsHiddenConfirmPassword] = useState(true);
+
+    const navigate = useNavigate();
 
     function handleFieldOnFocus() {
         if (messageUsername !== "") {
@@ -75,8 +77,9 @@ function SignUp({setComponentShowing}) {
                                 api.accounts.login(formData)
                                     .then((res1) => res1.json())
                                     .then((res1) => {
-                                        localStorage.setItem("token", res1.token);
-                                        refBackHome.current.click();
+                                        sessionStorage.setItem("token", res1.token);
+                                        // refBackHome.current.click();
+                                        navigate(-1);
                                     })
                             } else {
                                 res.json()

@@ -19,9 +19,9 @@ function Header() {
     
     useEffect(() => {
         // console.log("Effect in Header component");
-        if (localStorage.getItem("token") !== null) {
+        if (sessionStorage.getItem("token") !== null) {
             api.accounts.getInformations({
-                "token": localStorage.getItem("token")       
+                "token": sessionStorage.getItem("token")       
             })
             .then(
                 (res) => {
@@ -31,7 +31,7 @@ function Header() {
                                 setAccountInformations(res.informations);
                             })
                     } else {
-                        localStorage.removeItem("token");
+                        sessionStorage.removeItem("token");
                         setAccountInformations((prev) => ({
                             "something": "something"
                         }))
@@ -47,7 +47,7 @@ function Header() {
     }
 
     function handleSignOutOnClick() {
-        localStorage.removeItem("token");
+        sessionStorage.removeItem("token");
     }
   
     return (
@@ -98,7 +98,7 @@ function Header() {
             <Link
                 className={cx(
                     "buttonLogin",
-                    {"hidden": localStorage.getItem("token") !== null}
+                    {"hidden": sessionStorage.getItem("token") !== null}
                     )}
                 to={configs.routes.login}
             >
@@ -119,7 +119,7 @@ function Header() {
             <div
                 className={cx(
                     "user-profile",
-                    {"hidden": localStorage.getItem("token") === null}
+                    {"hidden": sessionStorage.getItem("token") === null}
                 )}
                 onClick={handleUserProfileOnClick}
             >   

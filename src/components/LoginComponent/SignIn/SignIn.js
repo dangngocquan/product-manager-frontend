@@ -6,7 +6,7 @@ import Button from '../../Button/Button';
 import services from '../../../services';
 import api from '../../../api';
 import configs from "../../../configs";
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -24,6 +24,8 @@ function SignIn({setComponentShowing}) {
     const [messagePassword, setMessagePassword] = useState("");
     const [messageLoginStatus, setMessageLoginStatus] = useState("");
     const [isHiddenPassword, setIsHiddenPassowd] = useState(true);
+
+    const navigate = useNavigate();
 
     function handleFieldOnFocus() {
         if (messageUsername !== "") {
@@ -65,8 +67,9 @@ function SignIn({setComponentShowing}) {
                                         // console.log("End handle in promise");
                                     } else {
                                         setMessageLoginStatus((prev) => res.message);
-                                        localStorage.setItem("token", res.token);
-                                        refBackHome.current.click();
+                                        sessionStorage.setItem("token", res.token);
+                                        // refBackHome.current.click();
+                                        navigate(-1);
                                         // console.log("Come to Home Page");
                                     }
                                 })

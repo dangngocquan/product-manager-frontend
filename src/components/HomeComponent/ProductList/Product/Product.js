@@ -11,7 +11,7 @@ const cx = classNames.bind(styles);
 
 function Product({innerRef, index,  product}) {
     function handleOnClick() {
-        localStorage.setItem("productInformations", product.id);
+        sessionStorage.setItem("productInformations", product.id);
     }
 
     return (

@@ -94,14 +94,29 @@ function ProductInformations() {
                     <div
                         className={cx("product-media")}
                     >
+
                         <div
-                            className={cx("product-image-showing")}
+                            className={cx("product-image-showing-wrapper")}
                         >
-                            <Image imgName={productInformations.products[0].image}></Image>
+                            <div
+                                className={cx("product-image-showing")}
+                            >
+                                <Image imgName={productInformations.products[0].image}></Image>
+
+                            </div>
 
                         </div>
 
+                        <div
+                            className={cx("product-images")}
+                        >
+
+                        </div>
+
+
                     </div>
+
+                    
 
                     <div
                         className={cx("product-content")}
