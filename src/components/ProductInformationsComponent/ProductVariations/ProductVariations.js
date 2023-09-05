@@ -15,7 +15,7 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
         productVariations = [
             {
                 "id": "0",
-                "price": "",
+                "price": "0",
                 "variant_value_ids": [
                 ],
                 "variant_value_names": [
@@ -30,14 +30,14 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
     if (product == null) {
         product = {
             "id": "0",
-            "shop_id": "1",
-            "name": "",
+            "shop_id": "0",
+            "name": "product",
             "image": "default-product-image.png",
-            "price": "",
-            "currency": "",
-            "stock": "",
-            "time_added": "",
-            "description": ""
+            "price": "0",
+            "currency": "$",
+            "stock": "0",
+            "time_added": "0",
+            "description": "none"
         }
     }
 

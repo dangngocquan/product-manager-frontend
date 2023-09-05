@@ -1,7 +1,7 @@
 import styles from './ProductInformations.module.scss';
 import classNames from "classnames/bind";
 import { motion } from 'framer-motion'; 
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import Image from '../Image';
 import api from '../../api';
 import ProductVariation from './ProductVariations';
@@ -9,31 +9,31 @@ import ProductVariation from './ProductVariations';
 const cx = classNames.bind(styles);
 
 
-function ProductInformations() {
+const ProductInformations = memo(function ProductInformations() {
     var infors = {
         "products": [
             {
-                "id": "1",
-                "shop_id": "1",
-                "name": "",
+                "id": "0",
+                "shop_id": "0",
+                "name": "product",
                 "image": "default-product-image.png",
-                "price": "",
-                "currency": "",
-                "stock": "",
-                "time_added": "",
-                "description": ""
+                "price": "0",
+                "currency": "$",
+                "stock": "0",
+                "time_added": "0",
+                "description": "none"
             }
         ],
         "productsImages": [
             {
-                "id": "1",
-                "product_id": "1",
-                "image": "default-product-image.png"
+                "images": [
+                    "img1693845778.184802.jpg"
+                ]
             }
         ],
         "productVariations": [
             {
-                "id": "1",
+                "id": "0",
                 "price": "459",
                 "variant_value_ids": [
                     "1",
@@ -41,9 +41,9 @@ function ProductInformations() {
                     "3"
                 ],
                 "variant_value_names": [
-                    "black",
-                    "normal",
-                    "normal"
+                    "value 1",
+                    "value 2",
+                    "value 3"
                 ],
                 "variant_ids": [
                     "1",
@@ -51,16 +51,24 @@ function ProductInformations() {
                     "3"
                 ],
                 "variant_names": [
-                    "color",
-                    "size",
-                    "type"
+                    "variant 1",
+                    "variant 2",
+                    "variant 3"
                 ]
             }
         ]
     }
 
+    function handleProductImageOnClick(imageIndex) {
+        return () => {
+            setImageIndex((prev) => imageIndex);
+        }
+    }
+
 
     const [productInformations, setProductInformations] = useState(infors);
+
+    const [imageIndex, setImageIndex] = useState(0);
 
 
     useEffect(() => {
@@ -70,6 +78,11 @@ function ProductInformations() {
             if (res.status == 200) {
                 res.json()
                 .then((res) => {
+                    if (res.informations.productsImages.length == 0) {
+                        res.informations.productsImages = [{
+                            "images": []
+                        }];
+                    }
                     setProductInformations((prev) => res.informations);
                 })
             }
@@ -101,7 +114,16 @@ function ProductInformations() {
                             <div
                                 className={cx("product-image-showing")}
                             >
-                                <Image imgName={productInformations.products[0].image}></Image>
+                                <Image 
+                                    imgName={
+                                        [
+                                            productInformations["products"][0]["image"], 
+                                            ...productInformations["productsImages"][0]["images"]
+                                        ][imageIndex]
+                                    }
+                                >
+
+                                </Image>
 
                             </div>
 
@@ -110,6 +132,34 @@ function ProductInformations() {
                         <div
                             className={cx("product-images")}
                         >
+                            {
+                                [
+                                    productInformations["products"][0]["image"], 
+                                    ...productInformations["productsImages"][0]["images"]
+                                ].map((image, index) => {
+                                    return (
+                                        <div
+                                            className={cx("product-image-wrapper")}
+                                            key={index}
+                                        > 
+                                            <div
+                                                className={
+                                                    cx(
+                                                        "product-image",
+                                                        {"product-image-selected": index == imageIndex}
+                                                    )
+                                                }
+                                                onClick={handleProductImageOnClick(index)}
+                                            >
+                                                <Image
+                                                    imgName={image}
+                                                ></Image>
+
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
 
                         </div>
 
@@ -159,6 +209,6 @@ function ProductInformations() {
             
         </div>
     )
-}
+})
 
 export default ProductInformations;
