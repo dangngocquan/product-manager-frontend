@@ -108,9 +108,6 @@ function Header() {
                     <li>
                         <p>Sign In</p>
                     </li>
-                    <li>
-                        <p>Sign Up</p>  
-                    </li>
                 </ul>
             </Link>
 

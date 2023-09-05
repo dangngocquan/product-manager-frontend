@@ -43,6 +43,7 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
 
     function createObjInfors() {
         var productId = product.id;
+        var productDefaultPrice = product.price;
 
         var variantNames = [];
         productVariations.forEach((productVariant) => {
@@ -87,6 +88,7 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
 
         return {
             productId,
+            productDefaultPrice,
             variantNames,
             variantValueNames,
             variantValueIds,
@@ -176,6 +178,7 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
     }
 
     function getCurrentPrice() {
+        if (infors["variantNames"].length == 0) return infors["productDefaultPrice"];
         for (var productVariant of productVariations) {
             var variantValueIds0 = productVariant['variant_value_ids'];
             var isSelected = variantValueIds0.every((id) => {
@@ -224,7 +227,7 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
                 className={cx("variations")}
             >
 
-                <p>Product Variants</p>
+                <p>{infors["variantNames"].length > 0? "Product Variants" : ""}</p>
 
                 {
                     infors.variantNames.map((variantName, variantNameIndex) => {

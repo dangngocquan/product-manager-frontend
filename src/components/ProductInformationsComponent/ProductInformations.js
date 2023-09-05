@@ -15,7 +15,7 @@ const ProductInformations = memo(function ProductInformations() {
             {
                 "id": "0",
                 "shop_id": "0",
-                "name": "product",
+                "name": "Product",
                 "image": "default-product-image.png",
                 "price": "0",
                 "currency": "$",
@@ -27,33 +27,25 @@ const ProductInformations = memo(function ProductInformations() {
         "productsImages": [
             {
                 "images": [
-                    "img1693845778.184802.jpg"
+                    "default-product-image.png"
                 ]
             }
         ],
         "productVariations": [
             {
                 "id": "0",
-                "price": "459",
+                "price": "0",
                 "variant_value_ids": [
-                    "1",
-                    "2",
-                    "3"
+
                 ],
                 "variant_value_names": [
-                    "value 1",
-                    "value 2",
-                    "value 3"
+
                 ],
                 "variant_ids": [
-                    "1",
-                    "2",
-                    "3"
+
                 ],
                 "variant_names": [
-                    "variant 1",
-                    "variant 2",
-                    "variant 3"
+
                 ]
             }
         ]
@@ -73,7 +65,7 @@ const ProductInformations = memo(function ProductInformations() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        api.products.getProductInformationsById(localStorage.getItem("productInformations"))
+        api.products.getProductInformationsById(sessionStorage.getItem("productInformations"))
         .then((res) => {
             if (res.status == 200) {
                 res.json()
@@ -196,12 +188,6 @@ const ProductInformations = memo(function ProductInformations() {
                     >
 
                     </div>
-
-                </div>
-
-                <div
-                    className={cx("product-details")}
-                >
 
                 </div>
             </div>
