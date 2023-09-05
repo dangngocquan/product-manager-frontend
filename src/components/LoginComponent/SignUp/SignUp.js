@@ -113,13 +113,12 @@ function SignUp({setComponentShowing}) {
             className={cx("wrapper")}
         >
 
-            <Link
+            <div
                 className={cx("back-home")}
-                to={configs.routes.home}
-                ref={refBackHome}
+                onClick={() => {navigate(-1)}}
             >
-                {Icons.Home}
-            </Link>
+                {Icons.ArrowLeft}
+            </div>
 
             <div
                 className={cx("heading")}
