@@ -67,6 +67,7 @@ function SignUp({setComponentShowing}) {
                 if (refPassword.current.value == refConfirmPassword.current.value) {
                     var formData = {
                         "username": refUsername.current.value,
+                        
                         "password": refPassword.current.value,
                         "nickname": refUsername.current.value
                     }
