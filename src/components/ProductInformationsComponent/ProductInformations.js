@@ -10,6 +10,7 @@ const cx = classNames.bind(styles);
 
 
 const ProductInformations = memo(function ProductInformations() {
+    
     var infors = {
         "products": [
             {

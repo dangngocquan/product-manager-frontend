@@ -110,9 +110,16 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
             selectedIds.push(-1);
         })
 
+        var price = objInfors.productDefaultPrice;
+
+        // varant of product that user are chosing
+        var variantId = -1;
+
         return {
             status: matrix,
-            selectedIds: selectedIds
+            selectedIds: selectedIds,
+            price,
+            variantId
         };
     }
 
@@ -120,6 +127,7 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
     function handleAttributeValueOnClick(variantNameIndex, variantValueNameIndex) {
         return function () {
             var newVariantValuesStatus = {...variantValuesStatus};
+            // update status and selected ids of variant value
             var status = newVariantValuesStatus["status"];
             var selectedIds = newVariantValuesStatus["selectedIds"];
             status[variantNameIndex].forEach((value, index) => {
@@ -131,6 +139,11 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
             })
             selectedIds[variantNameIndex] = infors["variantValueIds"][variantNameIndex][variantValueNameIndex];
 
+            // update price and variantId
+            var priceAndVariantId = getCurrentPriceAndVariantId();
+
+            newVariantValuesStatus["price"] = priceAndVariantId['price'];
+            newVariantValuesStatus['variantId'] = priceAndVariantId['variantId'];
 
             fillVariantValuesUnable(newVariantValuesStatus);
 
@@ -151,8 +164,6 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
         var selectedIds = variantValuesStatus0["selectedIds"];
         var variantValueIds = infors0["variantValueIds"];
 
-        console.log("selectedIds: " + selectedIds);
-
         for (var i = 0; i < status.length; i++) {
             for (var j = 0; j < status[i].length; j++) {
                 if (status[i][j] == 1) continue;
@@ -165,7 +176,6 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
                         return variantValueIds0.includes(id) || id == -1;
                     })
                 })
-                console.log("row " + i + " column " + j + " isExistCase " + isExistCase)
 
                 if (isExistCase) {
                     status[i][j] = 0;
@@ -177,18 +187,30 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
         }
     }
 
-    function getCurrentPrice() {
-        if (infors["variantNames"].length == 0) return infors["productDefaultPrice"];
+    function getCurrentPriceAndVariantId(objInfors) {
+        if (objInfors == null) objInfors = infors;
+        if (objInfors["variantNames"].length == 0) return {
+            price: objInfors["productDefaultPrice"],
+            variantId: -1
+        };
         for (var productVariant of productVariations) {
             var variantValueIds0 = productVariant['variant_value_ids'];
             var isSelected = variantValueIds0.every((id) => {
                 return variantValuesStatus['selectedIds'].includes(id);
             });
 
-            if (isSelected) return productVariant['price'];
+            if (isSelected) return {
+                price: productVariant['price'],
+                variantId: productVariant['id']
+            }
         }
-        return product.price;
+        return {
+            price: product.price,
+            variantId: -1
+        }
+
     }
+
 
     function increaseQuantity() {
         setQuantity((prev) => prev + 1);
@@ -196,6 +218,11 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
 
     function decreaseQuantity() {
         setQuantity((prev) => Math.max(prev - 1, 1));
+    }
+
+
+    function handleAddToCartOnClick() {
+        console.log(variantValuesStatus);
     }
 
 
@@ -215,7 +242,7 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
     }
 
     
-
+    console.log("Render");
 
     return (
         <div
@@ -331,7 +358,7 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
                 <p>
                     {product.currency}
                     {
-                        getCurrentPrice()
+                        variantValuesStatus['price']
 
                         
                     }
@@ -344,14 +371,28 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
                 className={cx("order-or-cart")}
             >
                 <div
-                    className={cx("order-or-cart-item")}
+                    className={
+                        cx(
+                            "order-or-cart-item",
+                            {"order-or-cart-not-active": infors["variantNames"].length > 0 && variantValuesStatus["variantId"] == -1}
+                        )
+                    }
+                    onClick={
+                        (infors["variantNames"].length > 0 && variantValuesStatus["variantId"] == -1)? 
+                        () => {} : handleAddToCartOnClick
+                    }
                 >
                     {Icons.CartPlus}
                     <p>Add To Cart</p>
                 </div>
 
                 <div
-                    className={cx("order-or-cart-item")}
+                    className={
+                        cx(
+                            "order-or-cart-item",
+                            {"order-or-cart-not-active": infors["variantNames"].length > 0 &&    variantValuesStatus["variantId"] == -1}
+                        )
+                    }
                 >
                     {Icons.Cart}
                     <p>Buy Now</p>
