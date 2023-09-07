@@ -9,6 +9,7 @@ import Button from '../../Button';
 import services from '../../../services';
 import configs from '../../../configs';
 import { useNavigate } from 'react-router-dom';
+import { element } from 'prop-types';
 
 const cx = classNames.bind(styles);
 
@@ -90,6 +91,18 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
         if (sessionStorage.getItem(configs["sessionStorage"]["token"]) == null) {
             navigate(configs["routes"]["login"]);
         }
+
+        refNotify.current.push({
+            "element" : null,
+            "notify-content": "Add product to cart successfully."
+        });
+        var size = refNotify.current.length;
+        setTimeout(() => {
+            refNotify.current[size-1]["element"].style.display = "none";
+        }, 5000)
+        console.log(refNotify);
+        setRender((prev) => prev+1);
+
     }
 
 
@@ -116,19 +129,30 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
 
     const navigate = useNavigate();
 
-    const refNotify = useRef(null);
+    const refNotify = useRef([]);
+    const [render, setRender] = useState(0);
+
+    console.log("render")
 
     return (
         <div
             className={cx("wrapper")}
         >   
 
-            <div
-                className={cx("notify")}
-                ref={refNotify}
-            >
 
-            </div>
+            {
+                refNotify.current.map((e, i) => {
+                    return (
+                        <div
+                            className={cx("notify")}
+                            ref={element => refNotify.current[i]['element'] = (element)}
+                            key={i}
+                        >
+                            {refNotify.current[i]["notify-content"]}
+                        </div>
+                    )
+                })
+            }
 
             <div
                 className={cx("variations")}
