@@ -87,21 +87,33 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
     }
 
 
-    function handleAddToCartOnClick() {
+    async function handleAddToCartOnClick() {
         if (sessionStorage.getItem(configs["sessionStorage"]["token"]) == null) {
             navigate(configs["routes"]["login"]);
+            return;
         }
 
         refNotify.current.push({
             "element" : null,
-            "notify-content": "Add product to cart successfully."
+            "notify-content": "Some message"
         });
         var size = refNotify.current.length;
-        setTimeout(() => {
-            refNotify.current[size-1]["element"].style.display = "none";
-        }, 5000)
-        console.log(refNotify);
-        setRender((prev) => prev+1);
+
+        await api.carts.addProduct(
+            sessionStorage.getItem(configs["sessionStorage"]["token"]),
+            sessionStorage.getItem(configs["sessionStorage"]["productInformations"]),
+            variantValuesStatus["variantId"]
+        ).then((res) => {
+            if (res.status == 201) {
+                refNotify.current[size-1]["notify-content"] = "Add product to cart successfully."
+            } else {
+                refNotify.current[size-1]["notify-content"] = "Add product to cart failed."
+            }
+            setTimeout(() => {
+                refNotify.current[size-1]["element"].style.display = "none";
+            }, 5000)
+            setRefNotifyData((prev) => refNotify.current);
+        })
 
     }
 
@@ -130,7 +142,7 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
     const navigate = useNavigate();
 
     const refNotify = useRef([]);
-    const [render, setRender] = useState(0);
+    const [refNotifyData, setRefNotifyData] = useState([]);
 
     console.log("render")
 
