@@ -2,6 +2,7 @@ import {BsChevronLeft, BsChevronRight, BsGithub, BsTwitter, BsCartPlus, BsCart4}
 import {RiLoginBoxLine, RiLockPasswordFill} from 'react-icons/ri';
 import {FaUserAlt} from 'react-icons/fa';
 import {ImHome} from 'react-icons/im';
+import {GiShoppingBag} from 'react-icons/gi';
 import {AiFillEye, AiFillEyeInvisible, AiOutlinePlus, AiOutlineMinus} from 'react-icons/ai';
 
 
@@ -20,5 +21,6 @@ export default {
     Plus: <AiOutlinePlus/>,
     Minus: <AiOutlineMinus/>,
     CartPlus: <BsCartPlus/>,
-    Cart: <BsCart4/>
+    Cart: <BsCart4/>,
+    ShoppingBag: <GiShoppingBag/>
 }

@@ -19,9 +19,9 @@ function Header() {
     
     useEffect(() => {
         // console.log("Effect in Header component");
-        if (sessionStorage.getItem("token") !== null) {
+        if (sessionStorage.getItem(configs["sessionStorage"]["token"]) !== null) {
             api.accounts.getInformations({
-                "token": sessionStorage.getItem("token")       
+                "token": sessionStorage.getItem(configs["sessionStorage"]["token"])       
             })
             .then(
                 (res) => {
@@ -31,7 +31,7 @@ function Header() {
                                 setAccountInformations(res.informations);
                             })
                     } else {
-                        sessionStorage.removeItem("token");
+                        sessionStorage.removeItem(configs["sessionStorage"]["token"]);
                         setAccountInformations((prev) => ({
                             "something": "something"
                         }))
@@ -47,7 +47,7 @@ function Header() {
     }
 
     function handleSignOutOnClick() {
-        sessionStorage.removeItem("token");
+        sessionStorage.removeItem(configs["sessionStorage"]["token"]);
     }
   
     return (
@@ -98,7 +98,7 @@ function Header() {
             <Link
                 className={cx(
                     "buttonLogin",
-                    {"hidden": sessionStorage.getItem("token") !== null}
+                    {"hidden": sessionStorage.getItem(configs["sessionStorage"]["token"]) !== null}
                     )}
                 to={configs.routes.login}
             >
@@ -112,11 +112,21 @@ function Header() {
             </Link>
 
             
+            <div
+                className={cx(
+                    "user-shopping-bag",
+                    {"hidden": sessionStorage.getItem(configs["sessionStorage"]["token"]) === null}
+                )}
+            >
+
+                {Icons.ShoppingBag}
+
+            </div>
 
             <div
                 className={cx(
                     "user-profile",
-                    {"hidden": sessionStorage.getItem("token") === null}
+                    {"hidden": sessionStorage.getItem(configs["sessionStorage"]["token"]) === null}
                 )}
                 onClick={handleUserProfileOnClick}
             >   

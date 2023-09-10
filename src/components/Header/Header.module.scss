@@ -103,6 +103,25 @@
     }
 }
 
+.user-shopping-bag {
+    height: calc(0.5 * var(--default-layout-header-height));
+    width: calc(0.5 * var(--default-layout-header-height));
+    cursor: pointer;
+    * {
+        width: 80%;
+        height: 80%;
+        color: var(--primary-color-item);
+        transition: 0.5s;
+    }
+}
+
+.user-shopping-bag:hover {
+    * {
+        color: var(--primary-color-item-hover)
+    }
+}
+
+
 .user-profile {
     display: flex;
     justify-content: center;
