@@ -6,7 +6,11 @@ const cx = classNames.bind(styles);
 
 function Loader({imgName}) {
     return (
-        <span class="loader"></span>
+        <div
+            className={cx("loader")}
+        >
+
+        </div>
     )
 }
 

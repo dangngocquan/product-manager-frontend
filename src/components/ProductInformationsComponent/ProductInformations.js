@@ -5,6 +5,7 @@ import { memo, useEffect, useState } from 'react';
 import Image from '../Image';
 import api from '../../api';
 import ProductVariation from './ProductVariations';
+import Loader from '../Loader/Loader';
 
 const cx = classNames.bind(styles);
 
@@ -63,6 +64,8 @@ const ProductInformations = memo(function ProductInformations() {
 
     const [imageIndex, setImageIndex] = useState(0);
 
+    const [isLoading, setIsLoading] = useState(false);
+
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -88,6 +91,18 @@ const ProductInformations = memo(function ProductInformations() {
         <div
             className={cx("wrapper")}
         >   
+
+            <div
+                className={cx(
+                    "loader",
+                    {"hidden": !isLoading}
+                )}
+            >
+                <Loader></Loader>
+            </div>
+
+
+
 
             <div
                 className={cx("container")}
@@ -173,6 +188,7 @@ const ProductInformations = memo(function ProductInformations() {
                             <ProductVariation
                                 productVariations={productInformations.productVariations}
                                 product={productInformations.products[0]}
+                                setIsLoading={setIsLoading}
                             >
 
                             </ProductVariation>

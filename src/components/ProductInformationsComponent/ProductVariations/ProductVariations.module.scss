@@ -13,7 +13,7 @@
     z-index: 1;
     top: var(--default-layout-header-height);
     right: 10px;
-    transform: translate(0%, 300%);
+    transform: translate(0%, 0%);
     min-width: 300px;
     height: calc(0.6 * var(--default-layout-header-height));
     background-color: var(--primary-color);
@@ -25,7 +25,7 @@
     font-size: 1.6rem;
     color: var(--green-color-1);
     font-weight: 500;
-    
+    opacity: 0;
 }
 
 .variations {
@@ -163,6 +163,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    user-select: none;
 }
 
 .order-or-cart-item {
@@ -244,7 +245,7 @@
         opacity: 0;
     }
     100% {
-        transform: translate(0%, 300%);
+        transform: translate(0%, 0%);
         opacity: 0;
     }
 }

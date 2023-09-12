@@ -14,7 +14,7 @@ import { element } from 'prop-types';
 const cx = classNames.bind(styles);
 
 
-const ProductVariation = memo(function ProductVariation({productVariations = [], product = null}) {
+const ProductVariation = memo(function ProductVariation({productVariations = [], product = null, setIsLoading}) {
     if (productVariations.length == 0) {
         productVariations = [
             {
@@ -93,27 +93,26 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
             return;
         }
 
-        refNotify.current.push({
-            "element" : null,
-            "notify-content": "Some message"
-        });
-        var size = refNotify.current.length;
+        setIsLoading(true);
+
 
         await api.carts.addProduct(
             sessionStorage.getItem(configs["sessionStorage"]["token"]),
             sessionStorage.getItem(configs["sessionStorage"]["productInformations"]),
             variantValuesStatus["variantId"]
         ).then((res) => {
+            var refObj = {
+                "notify-content": "Some message"
+            };
             if (res.status == 201) {
-                refNotify.current[size-1]["notify-content"] = "Add product to cart successfully."
+                refObj["notify-content"] = "Add product to cart successfully."
             } else {
-                refNotify.current[size-1]["notify-content"] = "Add product to cart failed."
+                refObj["notify-content"] = "Add product to cart failed."
             }
-            setTimeout(() => {
-                refNotify.current[size-1]["element"].style.display = "none";
-            }, 5000)
-            setRefNotifyData((prev) => refNotify.current);
-        })
+            setNotifyBars((prev) => [...prev, refObj]);
+        });
+
+        setIsLoading(false);
 
     }
 
@@ -141,10 +140,9 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
 
     const navigate = useNavigate();
 
-    const refNotify = useRef([]);
-    const [refNotifyData, setRefNotifyData] = useState([]);
+    const [notifyBars, setNotifyBars] = useState([]);
 
-    console.log("render")
+    // console.log("render")
 
     return (
         <div
@@ -153,14 +151,13 @@ const ProductVariation = memo(function ProductVariation({productVariations = [],
 
 
             {
-                refNotify.current.map((e, i) => {
+                notifyBars.map((notify, i) => {
                     return (
                         <div
                             className={cx("notify")}
-                            ref={element => refNotify.current[i]['element'] = (element)}
                             key={i}
                         >
-                            {refNotify.current[i]["notify-content"]}
+                            {notify["notify-content"]}
                         </div>
                     )
                 })
