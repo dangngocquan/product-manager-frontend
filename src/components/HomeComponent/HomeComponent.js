@@ -6,6 +6,7 @@ import Slider from './Slider';
 import ProductList from './ProductList';
 import api from '../../api';
 import services from '../../services';
+import Loader from '../Loader';
 
 const cx = classNames.bind(styles);
 
@@ -13,15 +14,33 @@ const cx = classNames.bind(styles);
 function HomeComponent() {
     const [data, setData] = useState([]);
 
+    const [isLoading, setIsLoading] = useState(false);
+
     useEffect(() => {
-        api.categories.getCategoryByLevel(1)
-        .then(function (response) {
-            setData((prev) => response.categories.categories);
-        })
+        const fetchData = async () => {
+            await api.categories.getCategoryByLevel(1)
+            .then(function (response) {
+                setData((prev) => response.categories.categories);
+            })
+        }
+        setIsLoading(true);
+        fetchData();
+        setIsLoading(false);
     }, []);
+
+    
 
     return (
         <div className={cx("wrapper")}>
+
+            <div
+                className={cx(
+                    "loader",
+                    {"hidden": !isLoading}
+                )}
+            >
+                <Loader></Loader>
+            </div>
             
             <div
                 className={cx("slider")}
