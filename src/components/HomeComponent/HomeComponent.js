@@ -16,16 +16,16 @@ function HomeComponent() {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(async () => {
-        setIsLoading(true);
+    useEffect(() => {
         const fetchData = async () => {
+            setIsLoading(true);
             await api.categories.getCategoryByLevel(1)
             .then(function (response) {
                 setData((prev) => response.categories.categories);
             })
+            setIsLoading(false);
         }
-        await fetchData();
-        setIsLoading(false);
+        fetchData();
     }, []);
 
     return (
