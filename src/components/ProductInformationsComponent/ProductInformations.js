@@ -69,20 +69,24 @@ const ProductInformations = memo(function ProductInformations() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        api.products.getProductInformationsById(sessionStorage.getItem("productInformations"))
-        .then((res) => {
-            if (res.status == 200) {
-                res.json()
-                .then((res) => {
-                    if (res.informations.productsImages.length == 0) {
-                        res.informations.productsImages = [{
-                            "images": []
-                        }];
-                    }
-                    setProductInformations((prev) => res.informations);
-                })
-            }
-        })
+        const fetchData = async () => {
+            setIsLoading(true);
+            await api.products.getProductInformationsById(sessionStorage.getItem("productInformations"))
+            .then((res) => {
+                if (res.status == 200) {
+                    res.json()
+                    .then((res) => {
+                        if (res.informations.productsImages.length == 0) {
+                            res.informations.productsImages = [{
+                                "images": []
+                            }];
+                        }
+                        setProductInformations((prev) => res.informations);
+                    })
+                }
+            })
+            setIsLoading(false);
+        }
     }, [])
 
     
