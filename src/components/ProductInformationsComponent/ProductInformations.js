@@ -87,6 +87,7 @@ const ProductInformations = memo(function ProductInformations() {
             })
             setIsLoading(false);
         }
+        fetchData();
     }, [])
 
     
