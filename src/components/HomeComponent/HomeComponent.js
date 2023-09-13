@@ -16,19 +16,17 @@ function HomeComponent() {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
+    useEffect(async () => {
+        setIsLoading(true);
         const fetchData = async () => {
             await api.categories.getCategoryByLevel(1)
             .then(function (response) {
                 setData((prev) => response.categories.categories);
             })
         }
-        setIsLoading(true);
-        fetchData();
+        await fetchData();
         setIsLoading(false);
     }, []);
-
-    
 
     return (
         <div className={cx("wrapper")}>
