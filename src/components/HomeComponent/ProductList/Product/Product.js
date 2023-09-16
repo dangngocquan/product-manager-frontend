@@ -10,10 +10,6 @@ const cx = classNames.bind(styles);
 
 
 function Product({innerRef, index,  product}) {
-    function handleOnClick() {
-        sessionStorage.setItem("productInformations", product.id);
-    }
-
     return (
         <div 
             className={cx("wrapper")}
@@ -21,8 +17,7 @@ function Product({innerRef, index,  product}) {
         >
             <Link
                 className={cx("link")}
-                to={configs.routes.productInformations}
-                onClick={handleOnClick}
+                to={configs.routes.productInformations + `?id=${product.id}`}
             >
                 <div 
                     className={cx("image")}

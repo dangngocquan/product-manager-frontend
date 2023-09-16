@@ -71,7 +71,9 @@ const ProductInformations = memo(function ProductInformations() {
         window.scrollTo(0, 0);
         const fetchData = async () => {
             setIsLoading(true);
-            await api.products.getProductInformationsById(sessionStorage.getItem("productInformations"))
+            await api.products.getProductInformationsById(
+                (new URLSearchParams(window.location.search)).get('id')
+            )
             .then((res) => {
                 if (res.status == 200) {
                     res.json()
