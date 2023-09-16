@@ -1,4 +1,4 @@
-import { func } from 'prop-types';
+
 import Image from '../../../Image';
 import styles from './Product.module.scss';
 import classNames from "classnames/bind";

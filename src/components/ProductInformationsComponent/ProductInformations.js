@@ -1,6 +1,5 @@
 import styles from './ProductInformations.module.scss';
 import classNames from "classnames/bind";
-import { motion } from 'framer-motion'; 
 import { memo, useEffect, useState } from 'react';
 import Image from '../Image';
 import api from '../../api';
@@ -75,10 +74,10 @@ const ProductInformations = memo(function ProductInformations() {
                 (new URLSearchParams(window.location.search)).get('id')
             )
             .then((res) => {
-                if (res.status == 200) {
+                if (res.status === 200) {
                     res.json()
                     .then((res) => {
-                        if (res.informations.productsImages.length == 0) {
+                        if (res.informations.productsImages.length === 0) {
                             res.informations.productsImages = [{
                                 "images": []
                             }];
@@ -161,7 +160,7 @@ const ProductInformations = memo(function ProductInformations() {
                                                 className={
                                                     cx(
                                                         "product-image",
-                                                        {"product-image-selected": index == imageIndex}
+                                                        {"product-image-selected": index === imageIndex}
                                                     )
                                                 }
                                                 onClick={handleProductImageOnClick(index)}
