@@ -11,6 +11,7 @@ import Home from '../pages/Home';
 import Categories from '../pages/Categories';
 import LoginComponent from '../pages/Login';
 import ProductInformations from '../pages/ProductInformations';
+import UserProfile from '../pages/UserProfile';
 
 // Public routes
 const publicRoutes = [
@@ -33,6 +34,11 @@ const publicRoutes = [
         path: configs.routes.productInformations,
         component: ProductInformations,
         layout: DefaultLayout
+    },
+    {
+        path: configs.routes.userProfile,
+        component: UserProfile,
+        layout: LayoutBlank
     }
 ];
 

@@ -145,7 +145,14 @@ function Header() {
                     )}
                 >
 
-                    <li>Your profile</li>
+                    <li>
+                        <Link
+                            to={configs.routes.userProfile}
+                        >
+                            Your profile
+                        </Link>
+                        
+                    </li>
                     <li
                         onClick={handleSignOutOnClick}
                     >

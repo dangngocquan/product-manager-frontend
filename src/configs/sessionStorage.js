@@ -1,6 +1,5 @@
 const sessionStorage = {
-    token: "token",
-    productInformations : "productInformations"
+    token: "token"
 }
 
 export default sessionStorage;  
