@@ -2,14 +2,51 @@ import styles from './UserProfile.module.scss';
 import classNames from "classnames/bind";
 
 import services from "../../services";
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import configs from "../../configs";
 import Icons from '../Icon';
 import Image from '../Image';
+import api from '../../api';
+import AccountView from './AccountView/AccountView';
+import PersionalInformationsView from './PersionalInformationsView/PersionalInformationsView';
+import AddressesView from './AddressesView/AddresesView';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 
 function UserProfile() {
+    const [accountInformations, setAccountInformations] = useState({});
+    const [indexOptionSelected, setIndexOptionSelected] = useState(0);
+    const negative = useNavigate();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            if (sessionStorage.getItem(configs["sessionStorage"]["token"]) !== null) {
+                await api.accounts.getInformations({
+                    "token": sessionStorage.getItem(configs["sessionStorage"]["token"])       
+                })
+                .then(
+                    (res) => {
+                        if (res.status == 200) {
+                            return res.json()
+                                .then((res) => {
+                                    setAccountInformations(res.informations);
+                                })
+                        } else {
+                            sessionStorage.removeItem(configs["sessionStorage"]["token"]);
+                            setAccountInformations((prev) => ({
+                                "something": "something"
+                            }))
+                        }
+                    }
+                )
+            }
+        }
+        
+        fetchData();
+
+    }, [])
 
     return (
         <div
@@ -18,6 +55,7 @@ function UserProfile() {
 
             <div
                 className={cx("back")}
+                onClick={() => negative(-1)}
             >
                 {Icons.ArrowLeft}
                 <p>Back</p>
@@ -44,7 +82,7 @@ function UserProfile() {
                             className={cx("portrait")}
                         >
                             <Image
-                                imgName={"default-portrait.jpg"}
+                                imgName={accountInformations?.portrait || "default-portrait.jpg"}
                             >
 
                             </Image>
@@ -53,7 +91,7 @@ function UserProfile() {
                         <div
                             className={cx("nickname")}
                         >
-                            {"Đặng Ngọc Quân"}
+                            {accountInformations?.nickname || "Nickname"}
                         </div>
                     </div>
 
@@ -67,15 +105,70 @@ function UserProfile() {
                         className={cx("options")}
                     >
 
-                    <li>Account</li>
-                    <li>Personal Informations</li>
-                    <li>Addresses</li>
+                        <li
+                            className={cx(
+                                {"selected-option": indexOptionSelected == 0}
+                            )}
+                            onClick={() => setIndexOptionSelected(0)}
+                        >
+                            Account
+                        </li>
+                        <li
+                            className={cx(
+                                {"selected-option": indexOptionSelected == 1}
+                            )}
+                            onClick={() => setIndexOptionSelected(1)}
+                        >
+                            Personal Informations
+                        </li>
+                        <li
+                            className={cx(
+                                {"selected-option": indexOptionSelected == 2}
+                            )}
+                            onClick={() => setIndexOptionSelected(2)}
+                        >
+                            Addresses
+                        </li>
 
                     </ul>
 
                     <div
                         className={cx("option-details")}
                     >
+                        <div
+                            className={cx(
+                                "option-detail",
+                                {"hidden": indexOptionSelected != 0}
+                            )}
+                        >
+                            <AccountView
+                                accountInformations={accountInformations}
+                            >
+
+                            </AccountView>
+                        </div>
+
+                        <div
+                            className={cx(
+                                "option-detail",
+                                {"hidden": indexOptionSelected != 1}
+                            )}
+                        >
+                            <PersionalInformationsView
+                                accountInformations={accountInformations}
+                            >
+
+                            </PersionalInformationsView>
+                        </div>
+
+                        <div
+                            className={cx(
+                                "option-detail",
+                                {"hidden": indexOptionSelected != 2}
+                            )}
+                        >
+                            <AddressesView></AddressesView>
+                        </div>
 
                     </div>
 
