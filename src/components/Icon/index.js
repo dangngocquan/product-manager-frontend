@@ -3,7 +3,7 @@ import {RiLoginBoxLine, RiLockPasswordFill} from 'react-icons/ri';
 import {FaUserAlt} from 'react-icons/fa';
 import {ImHome} from 'react-icons/im';
 import {GiShoppingBag} from 'react-icons/gi';
-import {AiFillEye, AiFillEyeInvisible, AiOutlinePlus, AiOutlineMinus} from 'react-icons/ai';
+import {AiFillEye, AiFillEyeInvisible, AiOutlinePlus, AiOutlineMinus, AiOutlineGooglePlus} from 'react-icons/ai';
 
 
 
@@ -22,5 +22,6 @@ export default {
     Minus: <AiOutlineMinus/>,
     CartPlus: <BsCartPlus/>,
     Cart: <BsCart4/>,
-    ShoppingBag: <GiShoppingBag/>
+    ShoppingBag: <GiShoppingBag/>,
+    Google: <AiOutlineGooglePlus/>
 }

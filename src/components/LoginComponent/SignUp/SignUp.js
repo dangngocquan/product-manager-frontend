@@ -79,7 +79,6 @@ function SignUp({setComponentShowing}) {
                                     .then((res1) => res1.json())
                                     .then((res1) => {
                                         sessionStorage.setItem("token", res1.token);
-                                        // refBackHome.current.click();
                                         navigate(-1);
                                     })
                             } else {
@@ -107,6 +106,17 @@ function SignUp({setComponentShowing}) {
                 setMessageUsername((prev) => usernameChecker.message);
             }
         }
+    }
+
+    function handleSignUpWithGoogle() {
+        api.accounts.authGoogle()
+            .then(res => {
+                if (res.status == 200) {
+                    console.log(200);
+                } else {
+                    console.log(401);
+                }
+            })
     }
 
     return (
@@ -275,6 +285,25 @@ function SignUp({setComponentShowing}) {
 
                     </div>
 
+                </div>
+
+                {/* Login social */}
+                <div
+                    className={cx("login-socials-title")}
+                >
+                    Or Sign Up With
+                </div>
+
+                <div
+                    className={cx("socials")}
+                >
+                    <a
+                        className={cx("social")}
+                        onClick={handleSignUpWithGoogle}
+                        // href={`${configs.api.root}/auth/google`}
+                    >
+                        {Icons.Google}
+                    </a>
                 </div>
 
             </div>

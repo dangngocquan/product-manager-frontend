@@ -7,6 +7,7 @@ import services from '../../../services';
 import api from '../../../api';
 import configs from "../../../configs";
 import {Link, useNavigate} from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
 
 const cx = classNames.bind(styles);
 
@@ -57,7 +58,8 @@ function SignIn({setComponentShowing}) {
                     "username": refUsername.current.value,
                     "password": refPassword.current.value
                 }
-                api.accounts.login(formData)
+                const submit = async () => {
+                    await api.accounts.login(formData)
                     .then(function (res) {
                         if (res.status === 200) {
                             res.json()
@@ -76,6 +78,9 @@ function SignIn({setComponentShowing}) {
                             
                         }
                     })
+                }
+                submit();
+                
             } else {
                 if (messagePassword !== passwordChecker.message) {
                     setMessagePassword((prev) => passwordChecker.message);
@@ -88,6 +93,37 @@ function SignIn({setComponentShowing}) {
             }
         }
     }
+
+    const handleGoogleLoginSuccess = (response) => {
+        console.log(response.credential);
+        const submit = async () => {
+            await api.accounts.loginWithGoogle({
+                "token": response.credential
+            })
+            .then(function (res) {
+                if (res.status === 200) {
+                    res.json()
+                        .then((res) => {
+                            if (res.token == null) {
+                                setMessageLoginStatus((prev) => res.message);
+                                // console.log("End handle in promise");
+                            } else {
+                                setMessageLoginStatus((prev) => res.message);
+                                sessionStorage.setItem("token", res.token);
+                                // refBackHome.current.click();
+                                navigate(-1);
+                                // console.log("Come to Home Page");
+                            }
+                        })
+                    
+                }
+            })
+        }
+        submit();
+    };
+    const handleGoogleLoginFailed = (error) => {
+        console.log(error);
+    };
 
     return (
         <div
@@ -211,7 +247,26 @@ function SignIn({setComponentShowing}) {
 
                 </div>
 
+                {/* Login social */}
+                <div
+                    className={cx("login-socials-title")}
+                >
+                    Or Log In With
+                </div>
+
+                <div
+                    className={cx("socials")}
+                >
+                    <div
+                        className={cx("social")}
+                    >
+                        <GoogleLogin onSuccess={handleGoogleLoginSuccess} onError={handleGoogleLoginFailed} />
+                    </div>
+                </div>
+
             </div>
+
+    
 
 
             {/* Don't have an account? Register Now */}
