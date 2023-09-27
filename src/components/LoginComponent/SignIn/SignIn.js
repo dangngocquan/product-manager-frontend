@@ -95,7 +95,6 @@ function SignIn({setComponentShowing}) {
     }
 
     const handleGoogleLoginSuccess = (response) => {
-        console.log(response.credential);
         const submit = async () => {
             await api.accounts.loginWithGoogle({
                 "token": response.credential
@@ -116,7 +115,7 @@ function SignIn({setComponentShowing}) {
                             }
                         })
                     
-                }
+                } 
             })
         }
         submit();

@@ -7,6 +7,7 @@ import services from '../../../services';
 import api from '../../../api';
 import configs from "../../../configs";
 import {Link, useNavigate} from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
 
 const cx = classNames.bind(styles);
 
@@ -108,16 +109,35 @@ function SignUp({setComponentShowing}) {
         }
     }
 
-    function handleSignUpWithGoogle() {
-        api.accounts.authGoogle()
-            .then(res => {
-                if (res.status == 200) {
-                    console.log(200);
+    const handleGoogleLoginSuccess = (response) => {
+        const submit = async () => {
+            await api.accounts.signUpWithGoogle({
+                "token": response.credential
+            })
+            .then(function (res) {
+                if (res.status === 201) {
+                    // Created account, then login
+                    api.accounts.loginWithGoogle({
+                        "token": response.credential
+                    })
+                        .then((res1) => res1.json())
+                        .then((res1) => {
+                            sessionStorage.setItem("token", res1.token);
+                            navigate(-1);
+                        })
                 } else {
-                    console.log(401);
+                    res.json()
+                        .then((res) => {
+                            setMessageLoginStatus((prev) => res.message);
+                        })
                 }
             })
-    }
+        }
+        submit();
+    };
+    const handleGoogleLoginFailed = (error) => {
+        console.log(error);
+    };
 
     return (
         <div
@@ -297,13 +317,11 @@ function SignUp({setComponentShowing}) {
                 <div
                     className={cx("socials")}
                 >
-                    <a
+                    <div
                         className={cx("social")}
-                        onClick={handleSignUpWithGoogle}
-                        // href={`${configs.api.root}/auth/google`}
                     >
-                        {Icons.Google}
-                    </a>
+                        <GoogleLogin onSuccess={handleGoogleLoginSuccess} onError={handleGoogleLoginFailed} />
+                    </div>
                 </div>
 
             </div>
