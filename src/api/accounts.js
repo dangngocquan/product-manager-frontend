@@ -25,6 +25,18 @@ async function loginWithGoogle(data) {
   return fetch(apiURL, options);
 }
 
+async function verifyEmail(data) {
+  var apiURL = configs.api.root + `/auths/verify-email`;
+  const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  return fetch(apiURL, options);
+}
+
 async function signUp(data) {
   var apiURL = configs.api.root + `/accounts`;
   const options = {
@@ -36,6 +48,8 @@ async function signUp(data) {
     }
   return fetch(apiURL, options);
 }
+
+
 
 async function signUpWithGoogle(data) {
   var apiURL = configs.api.root + `/accounts/new/google`;
@@ -68,5 +82,6 @@ export default {
     loginWithGoogle,
     signUp,
     signUpWithGoogle,
-    getInformations
+    getInformations,
+    verifyEmail
 }

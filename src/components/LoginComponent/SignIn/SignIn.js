@@ -259,7 +259,9 @@ function SignIn({setComponentShowing}) {
                     <div
                         className={cx("social")}
                     >
+                        {Icons.Google}
                         <GoogleLogin onSuccess={handleGoogleLoginSuccess} onError={handleGoogleLoginFailed} />
+                        
                     </div>
                 </div>
 

@@ -10,7 +10,7 @@ const cx = classNames.bind(styles);
 
 
 function LoginComponent() {
-    const [componentShowing, setComponentShowing] = useState(0); // 0: Sign In, 1: Sign Up
+    const [componentShowing, setComponentShowing] = useState(0); // 0: Sign In, 1: Sign Up, 2: Verify OTP
 
 
     return (
@@ -57,7 +57,6 @@ function LoginComponent() {
                     </SignUp>
             
                 </div>
-
             
             
             </motion.div>

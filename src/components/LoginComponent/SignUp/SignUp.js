@@ -15,15 +15,18 @@ const cx = classNames.bind(styles);
 function SignUp({setComponentShowing}) {
     // console.log("Render");
     const username = useId();
+    const email = useId();
     const password = useId();
     const confirmPassword = useId();
 
     const refUsername = useRef();
+    const refEmail = useRef();
     const refPassword = useRef();
     const refConfirmPassword = useRef();
     const refBackHome = useRef();
 
     const [messageUsername, setMessageUsername] = useState("");
+    const [messageEmail, setMessageEmail] = useState("");
     const [messagePassword, setMessagePassword] = useState("");
     const [messageConfirmPassword, setMessageConfirmPassword] = useState("");
     const [messageLoginStatus, setMessageLoginStatus] = useState("");
@@ -35,6 +38,9 @@ function SignUp({setComponentShowing}) {
     function handleFieldOnFocus() {
         if (messageUsername !== "") {
             setMessageUsername((prev) => "");
+        }
+        if (messageEmail !== "") {
+            setMessageEmail((prev) => "");
         }
         if (messagePassword !== "") {
             setMessagePassword((prev) => "");
@@ -63,45 +69,65 @@ function SignUp({setComponentShowing}) {
         // console.log("Start Handle Submit");
         const usernameChecker = services.isUserNameValid(refUsername.current.value);
         if (usernameChecker.isValid) {
-            const passwordChecker = services.isPasswordValid(refPassword.current.value);
-            if (passwordChecker.isValid) {
-                if (refPassword.current.value == refConfirmPassword.current.value) {
-                    var formData = {
-                        "username": refUsername.current.value,
-                        
-                        "password": refPassword.current.value,
-                        "nickname": refUsername.current.value
-                    }
-                    api.accounts.signUp(formData)
-                        .then(function (res) {
-                            if (res.status === 201) {
-                                // Created account, then login
-                                api.accounts.login(formData)
-                                    .then((res1) => res1.json())
-                                    .then((res1) => {
-                                        sessionStorage.setItem("token", res1.token);
-                                        navigate(-1);
+            const emailChecker = services.isEmailValid(refEmail.current.value);
+            if (emailChecker.isValid) {
+                const passwordChecker = services.isPasswordValid(refPassword.current.value);
+                if (passwordChecker.isValid) {
+                    if (refPassword.current.value == refConfirmPassword.current.value) {
+                        var formData = {
+                            "username": refUsername.current.value,
+                            "email": refEmail.current.value,
+                            "password": refPassword.current.value,
+                            "nickname": refUsername.current.value
+                        };
+                        api.accounts.verifyEmail(formData)
+                            .then(res => {
+                                if (res.status == 201) {
+                                    var otp = prompt("Check your email and enter otp code: ", "");
+                                    api.accounts.signUp({
+                                        "email": refEmail.current.value,
+                                        "otp": otp
+                                    }).then(function (res) {
+                                        if (res.status === 201) {
+                                            // Created account, then login
+                                            api.accounts.login(formData)
+                                                .then((res1) => res1.json())
+                                                .then((res1) => {
+                                                    sessionStorage.setItem("token", res1.token);
+                                                    navigate(-1);
+                                                })
+                                        } else {
+                                            res.json()
+                                                .then((res) => {
+                                                    setMessageLoginStatus((prev) => res.message);
+                                                })
+                                        }
                                     })
-                            } else {
-                                res.json()
-                                    .then((res) => {
-                                        setMessageLoginStatus((prev) => res.message);
-                                    })
-                            }
-                        })
+                                } else {
+                                    res.json()
+                                        .then((res) => {
+                                            setMessageLoginStatus((prev) => res.message);
+                                        })
+                                }
+                                
+                            })
 
+                    } else {
+                        if (messagePassword !== "Password and confirm password don't match.") {
+                            setMessageConfirmPassword((prev) => "Password and confirm password don't match.");
+                        }
+                    }
+                    
                 } else {
-                    if (messagePassword !== "Password and confirm password don't match.") {
-                        setMessageConfirmPassword((prev) => "Password and confirm password don't match.");
+                    if (messagePassword !== passwordChecker.message) {
+                        setMessagePassword((prev) => passwordChecker.message);
                     }
                 }
-                
             } else {
-                if (messagePassword !== passwordChecker.message) {
-                    setMessagePassword((prev) => passwordChecker.message);
+                if (messageEmail !== emailChecker.message) {
+                    setMessageEmail((prev) => emailChecker.message);
                 }
             }
-
         } else {
             if (messageUsername !== usernameChecker.message) {
                 setMessageUsername((prev) => usernameChecker.message);
@@ -191,6 +217,40 @@ function SignUp({setComponentShowing}) {
                         className={cx("field-message")}
                     >
                         {messageUsername}
+                    </p>
+                </div>
+
+                {/* email */}
+                <div 
+                    className={cx("field")}
+                >
+                    <div 
+                        className={cx("field-icon")}
+                    >
+                        {Icons.User}
+                    </div>
+
+                    <input
+                        className={cx("field-input")}
+                        placeholder='Email'
+                        id={email}
+                        ref={refEmail}
+                        onFocus={handleFieldOnFocus}
+                    >
+                        
+                    </input>
+
+                    <label
+                        className={cx("field-label")}
+                        htmlFor={email}
+                    >
+                        Email
+                    </label>
+
+                    <p
+                        className={cx("field-message")}
+                    >
+                        {messageEmail}
                     </p>
                 </div>
 
@@ -320,6 +380,7 @@ function SignUp({setComponentShowing}) {
                     <div
                         className={cx("social")}
                     >
+                        {Icons.Google}
                         <GoogleLogin onSuccess={handleGoogleLoginSuccess} onError={handleGoogleLoginFailed} />
                     </div>
                 </div>
