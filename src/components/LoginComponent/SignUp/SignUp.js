@@ -83,26 +83,11 @@ function SignUp({setComponentShowing}) {
                         api.accounts.verifyEmail(formData)
                             .then(res => {
                                 if (res.status == 201) {
-                                    var otp = prompt("Check your email and enter otp code: ", "");
-                                    api.accounts.signUp({
-                                        "email": refEmail.current.value,
-                                        "otp": otp
-                                    }).then(function (res) {
-                                        if (res.status === 201) {
-                                            // Created account, then login
-                                            api.accounts.login(formData)
-                                                .then((res1) => res1.json())
-                                                .then((res1) => {
-                                                    sessionStorage.setItem("token", res1.token);
-                                                    navigate(-1);
-                                                })
-                                        } else {
-                                            res.json()
-                                                .then((res) => {
-                                                    setMessageLoginStatus((prev) => res.message);
-                                                })
-                                        }
-                                    })
+                                    sessionStorage.setItem("username", formData.username);
+                                    sessionStorage.setItem("email", formData.email);
+                                    sessionStorage.setItem("password", formData.password);
+                                    sessionStorage.setItem("nickname", formData.nickname);
+                                    navigate(configs.routes.authOTP);
                                 } else {
                                     res.json()
                                         .then((res) => {
@@ -285,7 +270,7 @@ function SignUp({setComponentShowing}) {
                         className={cx("eye")}
                         onClick={handleEyeOnClick}
                     >
-                        {isHiddenPassword? Icons.Eye : Icons.EyeInvisible}
+                        {isHiddenPassword? Icons.EyeInvisible : Icons.Eye}
                     </div>
 
                     <p
@@ -329,7 +314,7 @@ function SignUp({setComponentShowing}) {
                         className={cx("eye")}
                         onClick={handleEyeOnClick2}
                     >
-                        {isHiddenConfirmPassword? Icons.Eye : Icons.EyeInvisible}
+                        {isHiddenConfirmPassword? Icons.EyeInvisible : Icons.Eye}
                     </div>
 
                     <p

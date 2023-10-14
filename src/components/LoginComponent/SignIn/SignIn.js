@@ -210,7 +210,7 @@ function SignIn({setComponentShowing}) {
                         className={cx("eye")}
                         onClick={handleEyeOnClick}
                     >
-                        {isHiddenPassword? Icons.Eye : Icons.EyeInvisible}
+                        {isHiddenPassword? Icons.EyeInvisible : Icons.Eye}
                     </div>
 
                     <p

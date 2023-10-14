@@ -12,6 +12,7 @@ import Categories from '../pages/Categories';
 import LoginComponent from '../pages/Login';
 import ProductInformations from '../pages/ProductInformations';
 import UserProfile from '../pages/UserProfile';
+import AuthOTP from '../pages/AuthOTP';
 
 // Public routes
 const publicRoutes = [
@@ -38,6 +39,11 @@ const publicRoutes = [
     {
         path: configs.routes.userProfile,
         component: UserProfile,
+        layout: LayoutBlank
+    },
+    {
+        path: configs.routes.authOTP,
+        component: AuthOTP,
         layout: LayoutBlank
     }
 ];

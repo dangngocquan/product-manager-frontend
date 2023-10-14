@@ -1,0 +1,36 @@
+.wrapper {
+    height: 100%;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.input {
+    border: 1px solid var(--gray-color-2);
+    outline: none;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    font-size: 5.0rem;
+    text-align: center;
+    border-width: 2px;
+    transition: 0.3s;
+}
+
+.input:focus {
+    border-color: var(--green-color-1);
+    animation: animationFocus 0.3s;
+    transform: translateY(-5px);
+    box-shadow: -3px 5px 20px var(--green-color-1);
+}
+
+@keyframes animationFocus {
+    0% {
+        box-shadow: 0 0px 0px var(--green-color-1);
+        transform: translateY(0px);
+    }
+    100% {
+        box-shadow: -3px 5px 20px var(--green-color-1);
+        transform: translateY(-5px);
+    }
+}
+
