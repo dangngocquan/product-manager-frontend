@@ -11,6 +11,8 @@ import AccountView from './AccountView/AccountView';
 import PersionalInformationsView from './PersionalInformationsView/PersionalInformationsView';
 import AddressesView from './AddressesView/AddresesView';
 import { useNavigate } from 'react-router-dom';
+import Icon from '../Icon';
+import axios from 'axios';
 
 const cx = classNames.bind(styles);
 
@@ -18,6 +20,7 @@ const cx = classNames.bind(styles);
 function UserProfile() {
     const [accountInformations, setAccountInformations] = useState({});
     const [indexOptionSelected, setIndexOptionSelected] = useState(0);
+    const [imagePortrait, setImagePortrait] = useState(null);
     const negative = useNavigate();
 
     useEffect(() => {
@@ -47,6 +50,20 @@ function UserProfile() {
         fetchData();
 
     }, [])
+
+    const portraitOnChange = (e) => {
+        console.log("Doing portrait on change");
+        console.log(e.target.files[0]);
+        const formData = new FormData(); 
+        console.log(formData);
+        formData.append('files', e.target.files[0], e.target.files[0].name);
+        console.log(formData);
+        setImagePortrait(formData);
+        axios.post('http://localhost:3000/uploads', formData)
+            .then(res => {
+                console.log('Axios response: ', res)
+            }) 
+    }
 
     return (
         <div
@@ -86,6 +103,20 @@ function UserProfile() {
                             >
 
                             </Image>
+                            <div
+                                className={cx("edit-portrait")}
+                            >
+                                {Icon.Edit}
+                            </div>
+
+                            <input
+                                type='file'
+                                name='picture'
+                                className={cx("button-choose-portrait")}
+                                onChange={portraitOnChange}
+                            >
+                            </input>
+
                         </div>
 
                         <div

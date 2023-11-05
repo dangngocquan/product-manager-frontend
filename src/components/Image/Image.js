@@ -5,7 +5,6 @@ const cx = classNames.bind(styles);
 
 
 function Image({imgName}) {
-    console.log(`${window.location.origin}/assets/images/${imgName}`);
     return (
         <img 
             className={cx("wrapper")}

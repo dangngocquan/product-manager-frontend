@@ -62,19 +62,51 @@
 .portrait {
     display: flex;
     height: 200%;
-    width: auto;
+    width: 180px;
     transform: translate(20px, -25%);
     border-radius: 50%;
     border: 10px solid #fff;
+    cursor: pointer;
     * {
         border-radius: 50%;
     }
+    overflow: hidden;
 }
 
 .nickname {
     font-size: 3.0rem;
     font-weight: 600;
     transform: translate(40px, 0px);
+}
+
+.edit-portrait {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transform: translate(35%, 100%);
+    cursor: pointer;
+    transition: 0.3s;
+    * {
+        width: 30%;
+        height: 30%;
+    }
+}
+
+.button-choose-portrait {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+}
+
+.portrait:hover {
+    .edit-portrait {
+        transform: translate(35%, 60%);
+        color: var(--primary-color-item-hover)
+    }
+    .button-choose-portrait {
+        cursor: pointer;
+    }
 }
 
 .body {
