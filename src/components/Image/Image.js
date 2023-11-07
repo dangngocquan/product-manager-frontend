@@ -8,7 +8,7 @@ function Image({imgName}) {
     return (
         <img 
             className={cx("wrapper")}
-            src={`${window.location.origin}/assets/images/${imgName}`}
+            src={`${imgName}`}
         >
         </img>
     )

@@ -14,7 +14,9 @@ const cx = classNames.bind(styles);
 function Header() {
     // console.log("render Header");
 
-    const [accountInformations, setAccountInformations] = useState({});
+    const [accountInformations, setAccountInformations] = useState({
+        'portrait' : 'http://res.cloudinary.com/ddgatus4k/image/upload/v1699373849/lxxkii0k2y5ttiphsbtz.png'
+    });
     const [isHiddenUserProfileOptions, setIsHiddenUserProfileOptions] = useState(true);
     
     useEffect(() => {
@@ -33,14 +35,13 @@ function Header() {
                     } else {
                         sessionStorage.removeItem(configs["sessionStorage"]["token"]);
                         setAccountInformations((prev) => ({
-                            "something": "something"
+                            's' : 's    '
                         }))
                     }
                 }
             )
         }
     }, [])
-
 
     function handleUserProfileOnClick() {
         setIsHiddenUserProfileOptions((prev) => !prev);
@@ -64,7 +65,7 @@ function Header() {
                 className={cx("logo")}
             >   
                 <Image
-                    imgName={"logo.png"}
+                    imgName={`${window.location.origin}/assets/images/logo.png`}
                 >
 
                 </Image>
@@ -131,9 +132,8 @@ function Header() {
                 onClick={handleUserProfileOnClick}
             >   
                 <Image
-                    imgName={accountInformations?.portrait || "default-portrait.jpg"}
+                    imgName={accountInformations.portrait}
                 >
-
                 </Image>
 
                 <p>You</p>

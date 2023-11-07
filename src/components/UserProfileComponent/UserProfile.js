@@ -51,17 +51,23 @@ function UserProfile() {
 
     }, [])
 
-    const portraitOnChange = (e) => {
-        console.log("Doing portrait on change");
-        console.log(e.target.files[0]);
+    function portraitOnChange(e) {
         const formData = new FormData(); 
         console.log(formData);
         formData.append('files', e.target.files[0], e.target.files[0].name);
         console.log(formData);
         setImagePortrait(formData);
-        axios.post('http://localhost:3000/uploads', formData)
+        axios.post(configs.api.root + '/uploads', formData)
             .then(res => {
-                console.log('Axios response: ', res)
+                console.log(res);
+                if (res.status == 200) {
+                    accountInformations.portrait = res.url;
+                    setAccountInformations((prev) => accountInformations);
+                    api.accounts.updatePortraitAccount(sessionStorage.getItem('token'), res.data.url)
+                        .then(res => {
+                            console.log(res.json());
+                        })
+                }
             }) 
     }
 
@@ -99,7 +105,7 @@ function UserProfile() {
                             className={cx("portrait")}
                         >
                             <Image
-                                imgName={accountInformations?.portrait || "default-portrait.jpg"}
+                                imgName={accountInformations.portrait}
                             >
 
                             </Image>

@@ -75,6 +75,21 @@ async function getInformations(data) {
   return fetch(apiURL, options);
 }
 
+async function updatePortraitAccount(token, image) {
+  var apiURL = configs.api.root + `/accounts/update-portrait`;
+  const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        'token': token,
+        'image': image
+      }),
+    }
+  return fetch(apiURL, options);
+}
+
 
 
 export default {
@@ -83,5 +98,6 @@ export default {
     signUp,
     signUpWithGoogle,
     getInformations,
-    verifyEmail
+    verifyEmail,
+    updatePortraitAccount
 }
