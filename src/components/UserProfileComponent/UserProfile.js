@@ -53,19 +53,29 @@ function UserProfile() {
 
     function portraitOnChange(e) {
         const formData = new FormData(); 
-        console.log(formData);
         formData.append('files', e.target.files[0], e.target.files[0].name);
-        console.log(formData);
         setImagePortrait(formData);
         axios.post(configs.api.root + '/uploads', formData)
             .then(res => {
-                console.log(res);
                 if (res.status == 200) {
-                    accountInformations.portrait = res.url;
-                    setAccountInformations((prev) => accountInformations);
+                    var newAccountInformations = {
+                        ...accountInformations
+                    }
+                    newAccountInformations.portrait = res.data.url;
+                    setAccountInformations((prev) => newAccountInformations);
                     api.accounts.updatePortraitAccount(sessionStorage.getItem('token'), res.data.url)
                         .then(res => {
-                            console.log(res.json());
+                            api.accounts.login({
+                                'username' : accountInformations.username,
+                                'password' : accountInformations.password
+                            })
+                            .then(res0 => {
+                                res0.json()
+                                    .then(res0 => {
+                                    sessionStorage.setItem(configs["sessionStorage"]["token"], res0.token);
+                                })
+                                
+                            })
                         })
                 }
             }) 
