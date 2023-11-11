@@ -13,12 +13,18 @@ import LoginComponent from '../pages/Login';
 import ProductInformations from '../pages/ProductInformations';
 import UserProfile from '../pages/UserProfile';
 import AuthOTP from '../pages/AuthOTP';
+import ProductsComponent from '../pages/Products';
 
 // Public routes
 const publicRoutes = [
     {
         path: configs.routes.home,
         component: Home,
+        layout: DefaultLayout
+    },
+    {
+        path: `${configs.routes.products}`,
+        component: ProductsComponent,
         layout: DefaultLayout
     },
     {

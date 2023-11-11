@@ -87,7 +87,13 @@ function Header() {
                     </Link>
                 </li>
                 <li>About</li>
-                <li>Products</li>
+                <li>
+                    <Link
+                        to={configs.routes.products}
+                    >
+                        Products
+                    </Link>
+                </li>
                 <li>News</li>
                 <li>Contact</li>
 
