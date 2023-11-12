@@ -2,6 +2,10 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    animation: animationAppear 0.3s linear;
+    opacity: 1;
+    transform: translate(0px, 0px);
+    box-shadow: -2px 2px 4px var(--primary-color-shadow-1);
 }
 
 .category {
@@ -11,11 +15,12 @@
     position: relative;
 }
 
+
 .category-name {
     display: flex;
     align-items: center;
     height: 50px;
-    background-color: #a35656;  
+    background-color: var(--white-color-1);  
     width: 100%;
     padding-left: 5px;
     transition: 0.5s;
@@ -30,7 +35,16 @@
     // transform: translate(100%, -50px);
     width: 100%;
     position: absolute;
-    margin-left: 100%;
+    margin-left: calc(100% + 10px);
+}
+
+.children::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 100%;
+    background-color: var(---white-color-1);
+    transform: translate(-10px, 0px);
 }
 
 .hidden {
@@ -38,7 +52,8 @@
 }
 
 .category-name:hover {
-    background-color: aqua;
+    background-color: var(--primary-color);
+    color: var(--primary-color-item-hover);
 }
 
 .category-name:hover ~ .children {
@@ -47,4 +62,16 @@
 
 .children:hover {
     display: block;
+}
+
+
+@keyframes animationAppear {
+    0% {
+        transform: translate(-10px, 0px);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(0px, 0px);
+        opacity: 1;
+    }
 }

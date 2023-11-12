@@ -3,6 +3,7 @@
     flex-direction: column;
     background-color: var(--primary-color);
     overflow: hidden;
+    color: var(--primary-color-text);
 }
 
 .loader {
@@ -35,19 +36,26 @@
     width: 20%;
     height: 100%;
     margin-left: 10%;
-    background-color: rgba(199, 65, 79, 0.333);
+    margin-right: 10px;
+    background-color: var(--white-color-1);
 }
 
 .categories-list-title {
+    // box-shadow: -2px 2px 4px var(--primary-color-shadow-1);
+    border-bottom: 2px solid #000;
+    margin-bottom: 10px;
+    height: 100px;
     p {
-        // text-align: center;
+        line-height: 50px;
         font-size: 2.6rem;
         font-weight: 700;
+        padding-left: 5px;
+        transform: translate(0px, 40px);
     }
 }
 
 .categories-list-items {
-    
+    box-shadow: -2px 2px 4px var(--primary-color-shadow-1);
 }
 
 .categories-list-item {
@@ -64,7 +72,7 @@
         height: 50px;
         width: 100%;
         padding-left: 5px;
-        background-color: #a35656;
+        background-color:   #fff;
         transition: 0.5s;
         .link {
             position: absolute;
@@ -74,15 +82,19 @@
     }
 
     .categories-list-item-children {
-        // position: absolute;
-        // width: 100%;
-        // height: 50px;
-        // transform: translate(100%, -50px);
-        // width: 100%;
         width: 100%;
         position: absolute;
-        margin-left: 100%;
+        margin-left: calc(100% + 10px);
     }
+}
+
+.categories-list-item-children::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 100%;
+    background-color: var(---white-color-1);
+    transform: translate(-10px, 0px);
 }
 
 
@@ -98,7 +110,8 @@
 .products-view-filter {
     width: 100%;
     height: 100px;
-    background-color: rgb(178, 210, 210);
+    background-color: var(--white-color-1);
+    border-bottom: 2px solid #000;
 }
 
 .products-view-items {
@@ -114,10 +127,12 @@
 }
 
 .categories-list-item-name:hover {
-    background-color: aqua;
+    background-color: var(--primary-color);
+    color: var(--primary-color-item-hover);
+    
 }
 
-.categories-list-item-name:hover ~ .categories-list-item-children{
+.categories-list-item-name:hover ~ .categories-list-item-children {
     display: block;
 }
 
