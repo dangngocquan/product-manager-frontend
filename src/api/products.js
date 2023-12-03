@@ -8,9 +8,12 @@ async function getLastestProductsByCategoryId(categoryId = 0) {
         })
 }
 
-async function getProductsByCategoryId(categoryId = 0, page = 0) {
+async function getProductsByCategoryId(categoryId = 0, page = 0, order = 0, sortBy = "default") {
     if (categoryId == null || categoryId == undefined) categoryId = 0;
-    var apiURL = configs.api.root + `/products/categoryId/${categoryId}/page/${page}`;
+    if (page == null || page == undefined) page = 0;
+    if (order == null || order == undefined) order = 0;
+    if (sortBy == null || sortBy == undefined) sortBy = "default";
+    var apiURL = configs.api.root + `/products/categoryId/${categoryId}/page/${page}/order/${order}/sortBy/${sortBy}`;
     return fetch(apiURL)
         .then(function (response) {
             return response.json();

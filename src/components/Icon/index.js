@@ -1,6 +1,6 @@
 import {BsChevronLeft, BsChevronRight, BsGithub, BsTwitter, BsCartPlus, BsCart4} from 'react-icons/bs';
 import {RiLoginBoxLine, RiLockPasswordFill} from 'react-icons/ri';
-import {FaUserAlt} from 'react-icons/fa';
+import {FaUserAlt, FaArrowDown, FaArrowUp} from 'react-icons/fa';
 import {ImHome} from 'react-icons/im';
 import {GiShoppingBag} from 'react-icons/gi';
 import {AiFillEye, AiFillEyeInvisible, AiOutlinePlus, AiOutlineMinus, AiOutlineGooglePlus, AiFillEdit} from 'react-icons/ai';
@@ -10,6 +10,8 @@ import {AiFillEye, AiFillEyeInvisible, AiOutlinePlus, AiOutlineMinus, AiOutlineG
 export default {
     ArrowLeft: <BsChevronLeft/>,
     ArrowRight: <BsChevronRight/>,
+    ArrowDown: <FaArrowDown/>,
+    ArrowUp: <FaArrowUp/>,
     Login: <RiLoginBoxLine />,
     User: <FaUserAlt/>,
     Password: <RiLockPasswordFill/>,
