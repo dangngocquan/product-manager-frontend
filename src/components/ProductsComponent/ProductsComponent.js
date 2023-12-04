@@ -204,7 +204,7 @@ function ProductsComponent() {
                                             0 :  (new URLSearchParams(window.location.search)).get('categoryId')}` 
                                         + `&page=${0}`
                                         + `&order=${1-orderSort}`
-                                        + `&sortBy=${"default"}`}
+                                        + `&sortBy=${sortBy}`}
                                     onClick={orderSortOnClick}
                                 >
                                     
